@@ -6,7 +6,6 @@
     <title>Signup Page</title>
     <style>
         body {
-            
             background-color: #f4f4f4;
             display: flex;
             justify-content: center;
@@ -74,6 +73,18 @@
         .login_page a:hover {
             text-decoration: underline;
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .input-valid {
+            border: 1px solid green;
+        }
+        .input-invalid {
+            border: 1px solid red;
+        }
     </style>
 </head>
 <body>
@@ -83,18 +94,23 @@
 
             <label for="first-name">First Name</label>
             <input type="text" id="first-name" class="input-field" placeholder="First Name" required>
+            <div class="error-message" id="firstNameError">First Name is required.</div>
 
             <label for="last-name">Last Name</label>
             <input type="text" id="last-name" class="input-field" placeholder="Last Name" required>
+            <div class="error-message" id="lastNameError">Last Name is required.</div>
 
             <label for="id">ID</label>
             <input type="text" id="id" class="input-field" placeholder="ID" required>
+            <div class="error-message" id="idError">ID is required.</div>
 
             <label for="email">Email</label>
             <input type="email" id="email" class="input-field" placeholder="Email" required>
+            <div class="error-message" id="emailError">Please enter a valid email address.</div>
 
             <label for="address">Address</label>
             <input type="text" id="address" class="input-field" placeholder="Address" required>
+            <div class="error-message" id="addressError">Address is required.</div>
 
             <label for="gender">Gender</label>
             <select id="gender" class="input-field" required>
@@ -103,19 +119,103 @@
                 <option value="female">Female</option>
                 <option value="other">Other</option>
             </select>
+            <div class="error-message" id="genderError">Please select your gender.</div>
 
             <label for="password">Password</label>
             <input type="password" id="password" class="input-field" placeholder="Password" required>
+            <div class="error-message" id="passwordError">Password must be at least 8 characters long.</div>
 
             <label for="confirm-password">Confirm Password</label>
             <input type="password" id="confirm-password" class="input-field" placeholder="Confirm Password" required>
+            <div class="error-message" id="confirmPasswordError">Passwords do not match.</div>
 
             <div class="button-container">
-                <button type="submit" class="login-button">Sign Up</button>
+                <button type="submit" class="login-button" id="signupButton">Sign Up</button>
             </div>
 
             <p class="login_page">Already have an account? <a href="index.html">Login here</a></p>
         </fieldset>
     </section>
+
+    <script>
+        const firstNameInput = document.getElementById("first-name");
+        const lastNameInput = document.getElementById("last-name");
+        const idInput = document.getElementById("id");
+        const emailInput = document.getElementById("email");
+        const addressInput = document.getElementById("address");
+        const genderInput = document.getElementById("gender");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirm-password");
+
+        // Helper function to validate and style input fields
+        function validateField(inputElement, errorElement, validationFn) {
+            const value = inputElement.value.trim();
+            if (!validationFn(value)) {
+                errorElement.style.display = "block";
+                inputElement.classList.add("input-invalid");
+                inputElement.classList.remove("input-valid");
+                return false;
+            } else {
+                errorElement.style.display = "none";
+                inputElement.classList.add("input-valid");
+                inputElement.classList.remove("input-invalid");
+                return true;
+            }
+        }
+
+        // Real-time validation for each field
+        firstNameInput.addEventListener("input", () => {
+            validateField(firstNameInput, document.getElementById("firstNameError"), (value) => value !== "");
+        });
+
+        lastNameInput.addEventListener("input", () => {
+            validateField(lastNameInput, document.getElementById("lastNameError"), (value) => value !== "");
+        });
+
+        idInput.addEventListener("input", () => {
+            validateField(idInput, document.getElementById("idError"), (value) => value !== "");
+        });
+
+        emailInput.addEventListener("input", () => {
+            validateField(emailInput, document.getElementById("emailError"), (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
+        });
+
+        addressInput.addEventListener("input", () => {
+            validateField(addressInput, document.getElementById("addressError"), (value) => value !== "");
+        });
+
+        genderInput.addEventListener("change", () => {
+            validateField(genderInput, document.getElementById("genderError"), (value) => value !== "");
+        });
+
+        passwordInput.addEventListener("input", () => {
+            validateField(passwordInput, document.getElementById("passwordError"), (value) => value.length >= 8);
+        });
+
+        confirmPasswordInput.addEventListener("input", () => {
+            const password = passwordInput.value.trim();
+            const confirmPassword = confirmPasswordInput.value.trim();
+            validateField(confirmPasswordInput, document.getElementById("confirmPasswordError"), (value) => value === password);
+        });
+
+        // Form submission handler
+        document.getElementById("signupButton").addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const isValidFirstName = validateField(firstNameInput, document.getElementById("firstNameError"), (value) => value !== "");
+            const isValidLastName = validateField(lastNameInput, document.getElementById("lastNameError"), (value) => value !== "");
+            const isValidId = validateField(idInput, document.getElementById("idError"), (value) => value !== "");
+            const isValidEmail = validateField(emailInput, document.getElementById("emailError"), (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
+            const isValidAddress = validateField(addressInput, document.getElementById("addressError"), (value) => value !== "");
+            const isValidGender = validateField(genderInput, document.getElementById("genderError"), (value) => value !== "");
+            const isValidPassword = validateField(passwordInput, document.getElementById("passwordError"), (value) => value.length >= 8);
+            const isValidConfirmPassword = validateField(confirmPasswordInput, document.getElementById("confirmPasswordError"), (value) => value === passwordInput.value.trim());
+
+            if (isValidFirstName && isValidLastName && isValidId && isValidEmail && isValidAddress && isValidGender && isValidPassword && isValidConfirmPassword) {
+                alert("Signup successful!");
+                window.location.href = "index.html"; // Redirect to login page
+            }
+        });
+    </script>
 </body>
 </html>
