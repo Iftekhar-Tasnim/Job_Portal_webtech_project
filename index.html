@@ -1,51 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Portal</title>
-
-    <style>
-        nav {
-            background-color: #333;
-            overflow: hidden;
-        }
-    
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-    
-        nav ul li {
-            float: left;
-        }
-    
-        nav ul li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-    
-        nav ul li a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-    </style>
-</head>
-<body>
+    <!-- External Styles -->
+    <link rel="stylesheet" href="styles/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header Section -->
     <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#jobs">Jobs</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <!-- Main Navigation -->
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#jobs">Jobs</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <!-- Search Bar -->
+        <form class="search-bar">
+          <input type="text" placeholder="Search jobs..." name="search" />
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <!-- User Actions -->
+        <ul class="right-nav">
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
     </header>
 
-</body>
+    <!-- Main Content -->
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Find Your Dream Job</h1>
+          <p>Discover thousands of job opportunities from top employers</p>
+          <div class="hero-buttons">
+            <a href="#jobs" class="cta-button">Browse Jobs</a>
+            <a href="login.html" class="secondary-button">Post a Job</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Jobs Section -->
+      <section class="featured-jobs">
+        <h2>Featured Jobs</h2>
+        <div class="job-cards">
+          <div class="job-card">
+            <h3>Software Developer</h3>
+            <p class="company">Tech Corp</p>
+            <p class="location">Dhaka</p>
+            <p class="salary">BDT 80,000 - 1,20,000</p>
+            <div class="job-tags">
+              <span>Full-time</span>
+              <span>Remote</span>
+            </div>
+          </div>
+          <div class="job-card">
+            <h3>UI/UX Designer</h3>
+            <p class="company">Design Hub</p>
+            <p class="location">Chittagong</p>
+            <p class="salary">BDT 70,000 - 1,00,000</p>
+            <div class="job-tags">
+              <span>Full-time</span>
+              <span>On-site</span>
+            </div>
+          </div>
+          <div class="job-card">
+            <h3>Marketing Manager</h3>
+            <p class="company">Marketing Pro</p>
+            <p class="location">Remote</p>
+            <p class="salary">BDT 1,00,000 - 1,50,000</p>
+            <div class="job-tags">
+              <span>Full-time</span>
+              <span>Remote</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categories Section -->
+      <section class="categories">
+        <h2>Job Categories</h2>
+        <div class="category-grid">
+          <div class="category">
+            <i class="fas fa-laptop-code"></i>
+            <h3>IT & Software</h3>
+            <span>125 Jobs</span>
+          </div>
+          <div class="category">
+            <i class="fas fa-paint-brush"></i>
+            <h3>Design</h3>
+            <span>85 Jobs</span>
+          </div>
+          <div class="category">
+            <i class="fas fa-chart-line"></i>
+            <h3>Marketing</h3>
+            <span>92 Jobs</span>
+          </div>
+          <div class="category">
+            <i class="fas fa-bullhorn"></i>
+            <h3>Sales</h3>
+            <span>78 Jobs</span>
+          </div>
+          <div class="category">
+            <i class="fas fa-briefcase"></i>
+            <h3>Management</h3>
+            <span>65 Jobs</span>
+          </div>
+          <div class="category">
+            <i class="fas fa-cogs"></i>
+            <h3>Engineering</h3>
+            <span>112 Jobs</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features">
+        <h2>Why Choose Us</h2>
+        <div class="feature-grid">
+          <div class="feature">
+            <i class="fas fa-check-circle"></i>
+            <h3>Verified Jobs</h3>
+            <p>All job postings are verified by our team</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-bolt"></i>
+            <h3>Quick Application</h3>
+            <p>Apply to jobs in just a few clicks</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-user-shield"></i>
+            <h3>Safe & Secure</h3>
+            <p>Your data is protected with us</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-heart"></i>
+            <h3>24/7 Support</h3>
+            <p>Get help anytime you need</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+          <div class="step">
+            <i class="fas fa-search"></i>
+            <h3>Find Jobs</h3>
+            <p>Search through thousands of jobs using our advanced filters</p>
+          </div>
+          <div class="step">
+            <i class="fas fa-file-alt"></i>
+            <h3>Apply Online</h3>
+            <p>
+              Submit your resume and cover letter directly through our platform
+            </p>
+          </div>
+          <div class="step">
+            <i class="fas fa-handshake"></i>
+            <h3>Get Hired</h3>
+            <p>Connect with employers and land your dream job</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="testimonials">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial-cards">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>
+                "I found my dream job through Job Portal! The platform was easy
+                to use and the support team was amazing."
+              </p>
+              <div class="testimonial-author">
+                <img src="images/testimonial1.jpg" alt="User 1" />
+                <div>
+                  <h4>John Doe</h4>
+                  <p>Software Engineer</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>
+                "As an employer, I was impressed with the quality of candidates
+                we received through Job Portal."
+              </p>
+              <div class="testimonial-author">
+                <img src="images/testimonial2.jpg" alt="User 2" />
+                <div>
+                  <h4>Jane Smith</h4>
+                  <p>HR Manager</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Blog Section -->
+      <section class="blog">
+        <h2>Latest Career Articles</h2>
+        <div class="blog-grid">
+          <article class="blog-post">
+            <img src="images/blog1.jpg" alt="Blog Post 1" />
+            <div class="blog-content">
+              <h3>5 Tips for a Successful Job Interview</h3>
+              <p>
+                Learn how to ace your next job interview with these expert tips
+              </p>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+          </article>
+          <article class="blog-post">
+            <img src="images/blog2.jpg" alt="Blog Post 2" />
+            <div class="blog-content">
+              <h3>How to Build an Impressive Resume</h3>
+              <p>
+                Discover the key elements that make a resume stand out to
+                employers
+              </p>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+          </article>
+          <article class="blog-post">
+            <img src="images/blog3.jpg" alt="Blog Post 3" />
+            <div class="blog-content">
+              <h3>Top 10 Skills Employers Look For</h3>
+              <p>
+                Find out which skills are most in-demand in today's job market
+              </p>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Statistics Section -->
+      <section class="stats">
+        <div class="stat">
+          <h3>15,000+</h3>
+          <p>Active Jobs</p>
+        </div>
+        <div class="stat">
+          <h3>5,000+</h3>
+          <p>Companies</p>
+        </div>
+        <div class="stat">
+          <h3>100,000+</h3>
+          <p>Job Seekers</p>
+        </div>
+      </section>
+
+      <!-- Call to Action Section -->
+      <section class="cta">
+        <h2>Ready to Find Your Dream Job?</h2>
+        <p>Join thousands of professionals who found their perfect match</p>
+        <a href="login.html" class="cta-button">Get Started</a>
+      </section>
+
+      <!-- Newsletter Section -->
+      <section class="newsletter">
+        <div class="newsletter-content">
+          <h2>Subscribe to Our Newsletter</h2>
+          <p>
+            Get the latest job openings and career advice straight to your inbox
+          </p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Job Portal</h3>
+          <p>Find your dream job with us</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#jobs">Jobs</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>Email: support@jobportal.com</p>
+          <p>Phone: +880 1234567890</p>
+        </div>
+        <div class="footer-section">
+          <h3>Follow Us</h3>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Job Portal. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
 </html>

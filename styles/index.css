@@ -1,0 +1,407 @@
+nav {
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.right-nav {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    margin: 0 20px;
+}
+
+.search-bar input[type="text"] {
+    padding: 8px 10px;
+    width: 200px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    background-color: #f1f1f1;
+}
+
+.search-bar button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    color: white;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #45a049;
+}
+
+.search-bar input[type="text"]:focus {
+    background-color: white;
+}
+
+.search-bar i {
+    font-size: 16px;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Main Layout */
+main {
+    padding: 2rem 0;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 8rem 2rem;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.cta-button, .secondary-button {
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.cta-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.secondary-button {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+/* Featured Jobs Section */
+.featured-jobs {
+    padding: 4rem 2rem;
+}
+
+.job-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.job-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+}
+
+.job-card h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.company, .location, .salary {
+    color: #666;
+    margin: 0.5rem 0;
+}
+
+.job-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.job-tags span {
+    background: #f1f1f1;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+/* Categories Section */
+.categories {
+    background: #f9f9f9;
+    padding: 4rem 2rem;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.category {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.category i {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.category h3 {
+    margin-bottom: 0.5rem;
+}
+
+.category span {
+    color: #666;
+}
+
+/* Features Section */
+.features {
+    padding: 4rem 2rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature {
+    text-align: center;
+    padding: 2rem;
+}
+
+.feature i {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+/* Stats Section */
+.stats {
+    background: #f9f9f9;
+    padding: 4rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stat {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.stat h3 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 0.5rem;
+}
+
+/* Call to Action Section */
+.cta {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    padding: 4rem 2rem 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* How It Works Section */
+.how-it-works {
+    padding: 4rem 2rem;
+    background: #f9f9f9;
+}
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.step {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.step i {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 4rem 2rem;
+    background: white;
+}
+.testimonial-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.testimonial-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 2rem;
+}
+.testimonial-content {
+    margin-bottom: 2rem;
+}
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.testimonial-author img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+/* Newsletter Section */
+.newsletter {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+.newsletter-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+.newsletter-form input {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+}
+.newsletter-form button {
+    padding: 1rem 2rem;
+    background: white;
+    color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.newsletter-form button:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+/* Blog Section */
+.blog {
+    padding: 4rem 2rem;
+    background: #f9f9f9;
+}
+.blog-grid {
+    display: grid
