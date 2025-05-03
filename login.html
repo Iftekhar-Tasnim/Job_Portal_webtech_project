@@ -3,168 +3,62 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Page</title>
-    <style>
-        body {
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background: white;
-            padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-        h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #5cb85c;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #4cae4c;
-        }
-        .button-container {
-            margin-top: 20px;
-        }
-        .links {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-        .links a {
-            text-decoration: none;
-            color: #5cb85c;
-        }
-        .links a:hover {
-            text-decoration: underline;
-        }
-        .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-        .input-valid {
-            border: 1px solid green;
-        }
-        .input-invalid {
-            border: 1px solid red;
-        }
-    </style>
+    <title>Job Portal Login</title>
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" required />
-            <div class="error-message" id="emailError">Please enter a valid email address.</div>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" required />
-            <div class="error-message" id="passwordError">Password is required.</div>
-
-            <div class="button-container">
-                <button type="submit">Login</button>
+    <div class="main-container">
+        <div class="welcome-section">
+            <h2>Welcome to Job Portal</h2>
+            <p>Please sign in to continue</p>
+        </div>
+        <div class="login-options">
+            <button class="login-option active" data-type="applicant">Applicant Login</button>
+            <button class="login-option" data-type="employer">Employer Login</button>
+        </div>
+        <div class="login-panels">
+            <div class="login-panel active" id="applicantLogin">
+                <form id="applicantLoginForm">
+                    <div class="input-group">
+                        <label for="applicantEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="applicantEmail" required>
+                        <div class="validation-message" id="applicantEmailError">Please enter a valid email address.</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="applicantPassword"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="applicantPassword" required>
+                        <div class="validation-message" id="applicantPasswordError">Password is required.</div>
+                    </div>
+                    <div class="form-actions">
+                        <a href="#" class="password-reset-link">Forgot Password?</a>
+                        <button type="submit" class="submit-button">Login as Applicant</button>
+                    </div>
+                </form>
             </div>
-
-            <div class="links">
-                <a href="./Registration.html">Register</a>
-                <a href="./forget_pass.html">Forgot Password?</a>
+            <div class="login-panel" id="employerLogin">
+                <form id="employerLoginForm">
+                    <div class="input-group">
+                        <label for="employerEmail"><i class="fas fa-envelope"></i> Company Email</label>
+                        <input type="email" id="employerEmail" required>
+                        <div class="validation-message" id="employerEmailError">Please enter a valid email address.</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="employerPassword"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="employerPassword" required>
+                        <div class="validation-message" id="employerPasswordError">Password is required.</div>
+                    </div>
+                    <div class="form-actions">
+                        <a href="#" class="password-reset-link">Forgot Password?</a>
+                        <button type="submit" class="submit-button">Login as Employer</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
+        <div class="registration-link">
+            <p>New to Job Portal? <a href="./Registration.html">Create an account</a></p>
+        </div>
     </div>
-
-    <script>
-        // Get references to DOM elements
-        const emailInput = document.getElementById("email");
-        const passwordInput = document.getElementById("password");
-        const emailError = document.getElementById("emailError");
-        const passwordError = document.getElementById("passwordError");
-
-        // Function to validate email in real-time
-        emailInput.addEventListener("input", function () {
-            const email = emailInput.value.trim();
-            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                emailError.style.display = "block";
-                emailInput.classList.add("input-invalid");
-                emailInput.classList.remove("input-valid");
-            } else {
-                emailError.style.display = "none";
-                emailInput.classList.add("input-valid");
-                emailInput.classList.remove("input-invalid");
-            }
-        });
-
-        // Function to validate password in real-time
-        passwordInput.addEventListener("input", function () {
-            const password = passwordInput.value.trim();
-            if (!password) {
-                passwordError.style.display = "block";
-                passwordInput.classList.add("input-invalid");
-                passwordInput.classList.remove("input-valid");
-            } else {
-                passwordError.style.display = "none";
-                passwordInput.classList.add("input-valid");
-                passwordInput.classList.remove("input-invalid");
-            }
-        });
-
-        // Form submission handler
-        document.getElementById("loginForm").addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-            let isValid = true;
-
-            // Validate email
-            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                emailError.style.display = "block";
-                emailInput.classList.add("input-invalid");
-                emailInput.classList.remove("input-valid");
-                isValid = false;
-            }
-
-            // Validate password
-            if (!password) {
-                passwordError.style.display = "block";
-                passwordInput.classList.add("input-invalid");
-                passwordInput.classList.remove("input-valid");
-                isValid = false;
-            }
-
-            // If all validations pass, proceed with login
-            if (isValid) {
-                alert("Login successful!");
-                window.location.href = "./home.html"; // Redirect to home page
-            }
-        });
-    </script>
+    <script src="js/login.js"></script>
 </body>
 </html>
