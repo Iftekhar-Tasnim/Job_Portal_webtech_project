@@ -1,0 +1,68 @@
+<!DOCTYPE html
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="../styles/registration.css">
+    
+</head>
+<body>
+    <section class="login-container">
+        <div class="user-type-selector">
+            <button class="user-type-btn active" onclick="showStep('email-verification')">Email Verification</button>
+            <button class="user-type-btn" onclick="showStep('security-question')">Security Question</button>
+        </div>
+
+        <!-- Email Verification Step -->
+        <div id="email-verification" class="registration-form active">
+            <fieldset class="login-box">
+                <legend class="login-title">Forgot Password</legend>
+
+                <p class="instruction">Enter your email address to receive a verification code.</p>
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="input-field" placeholder="Enter your email" required>
+                <div class="error-message" id="emailError">Please enter a valid email address.</div>
+
+                <div class="button-container">
+                    <button type="submit" class="login-button" id="sendCodeButton">Send Verification Code</button>
+                </div>
+
+                <p class="login_page">Remember your password? <a href="./login.html">Login here</a></p>
+            </fieldset>
+        </div>
+
+        <!-- Security Question Step -->
+        <div id="security-question" class="registration-form">
+            <fieldset class="login-box">
+                <legend class="login-title">Forgot Password</legend>
+
+                <p class="instruction">Answer your security question to reset your password.</p>
+
+                <label for="security-question-select">Security Question</label>
+                <select id="security-question-select" class="input-field" required>
+                    <option value="" disabled selected>Select your security question</option>
+                    <option value="pet">What was your first pet's name?</option>
+                    <option value="school">What was your first school?</option>
+                    <option value="city">What city were you born in?</option>
+                    <option value="friend">What is your best friend's name?</option>
+                </select>
+                <div class="error-message" id="questionError">Please select a security question.</div>
+
+                <label for="security-answer">Answer</label>
+                <input type="text" id="security-answer" class="input-field" placeholder="Enter your answer" required>
+                <div class="error-message" id="answerError">Please enter your answer.</div>
+
+                <div class="button-container">
+                    <button type="submit" class="login-button" id="verifyAnswerButton">Verify Answer</button>
+                </div>
+
+                <p class="login_page">Remember your password? <a href="./login.html">Login here</a></p>
+            </fieldset>
+        </div>
+    </section>
+
+    <script src="../Js/forgot-password.js"></script>
+</body>
+</html>

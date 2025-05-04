@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Job Portal</title>
+    <link rel="stylesheet" href="../styles/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="contact-container">
+        <div class="contact-box">
+            <div class="contact-header">
+                <h1>Contact Us</h1>
+                <p>Get in touch with us for any inquiries or support</p>
+            </div>
+
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                    <div class="error-message" id="nameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject"><i class="fas fa-tag"></i> Subject</label>
+                    <select id="subject" name="subject" required>
+                        <option value="" disabled selected>Select Subject</option>
+                        <option value="job_inquiry">Job Inquiry</option>
+                        <option value="technical_support">Technical Support</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="error-message" id="subjectError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-comment"></i> Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <div class="error-message" id="messageError"></div>
+                </div>
+
+                <div class="captcha-container">
+                    <div class="g-recaptcha" data-sitekey="your-site-key"></div>
+                    <div class="error-message" id="captchaError"></div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </div>
+            </form>
+
+            <div id="confirmationModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Thank You!</h2>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p>Your message has been sent successfully!</p>
+                        <p>We will get back to you as soon as possible.</p>
+                        <p>An auto-receipt has been sent to your email address.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../Js/contact.js"></script>
+</body>
+</html>
