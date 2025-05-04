@@ -66,29 +66,69 @@ document.addEventListener("DOMContentLoaded", function () {
     "applicantPasswordError"
   );
 
-  applicantForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+  document.addEventListener('DOMContentLoaded', function() {
+    // Handle login option switching
+    const loginOptions = document.querySelectorAll('.login-option');
+    const loginPanels = document.querySelectorAll('.login-panel');
 
-    let isValid = true;
+    loginOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const type = this.dataset.type;
+            loginOptions.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+            loginPanels.forEach(panel => panel.classList.remove('active'));
+            document.getElementById(`${type}Login`).classList.add('active');
+        });
+    });
 
-    if (!validateEmail(applicantEmail.value)) {
-      applicantEmailError.style.display = "block";
-      isValid = false;
-    } else {
-      applicantEmailError.style.display = "none";
+    // Handle applicant login
+    const applicantForm = document.getElementById('applicantLoginForm');
+    if (applicantForm) {
+        applicantForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('applicantEmail').value;
+            const password = document.getElementById('applicantPassword').value;
+
+            // Check demo credentials
+            if (email === 'user@employify.com' && password === '1234') {
+                isLoggedIn = true;
+                currentUser = {
+                    name: 'Job Seeker',
+                    email: email
+                };
+                updateAuthUI(true);
+                window.location.href = './index.html';
+            } else {
+                alert('Invalid credentials. Please use:\nEmail: user@employify.com\nPassword: 1234');
+            }
+        });
     }
 
-    if (!validatePassword(applicantPassword.value)) {
-      applicantPasswordError.style.display = "block";
-      isValid = false;
-    } else {
-      applicantPasswordError.style.display = "none";
-    }
+    // Handle employer login
+    const employerForm = document.getElementById('employerLoginForm');
+    if (employerForm) {
+        employerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('employerEmail').value;
+            const password = document.getElementById('employerPassword').value;
 
-    if (isValid) {
-      console.log("Applicant login submitted");
+            // Check demo credentials
+            if (email === 'emp@employify.com' && password === '1234') {
+                isLoggedIn = true;
+                currentUser = {
+                    name: 'Employer',
+                    email: email
+                };
+                updateAuthUI(true);
+                window.location.href = './index.html';
+            } else {
+                alert('Invalid credentials. Please use:\nEmail: emp@employify.com\nPassword: 1234');
+            }
+        });
     }
-  });
+});
 
   const employerForm = document.getElementById("employerLoginForm");
   const employerEmail = document.getElementById("employerEmail");
