@@ -44,6 +44,51 @@ const jobs = [
             "Attention to detail",
             "Good communication skills"
         ]
+    },
+    {
+        id: 4,
+        title: "Software Developer",
+        company: "Tech Solutions",
+        location: "Dhaka",
+        category: "it",
+        experience: "mid",
+        description: "We are looking for a talented software developer to join our team. You will be responsible for developing and maintaining our software products.",
+        requirements: [
+            "3+ years of experience in software development",
+            "Proficient in Java and JavaScript",
+            "Experience with web technologies",
+            "Strong problem-solving skills"
+        ]
+    },
+    {
+        id: 5,
+        title: "Software Developer",
+        company: "Tech Solutions",
+        location: "Dhaka",
+        category: "it",
+        experience: "mid",
+        description: "We are looking for a talented software developer to join our team. You will be responsible for developing and maintaining our software products.",
+        requirements: [
+            "3+ years of experience in software development",
+            "Proficient in Java and JavaScript",
+            "Experience with web technologies",
+            "Strong problem-solving skills"
+        ]
+    },
+    {
+        id: 6,
+        title: "Software Developer",
+        company: "Tech Solutions",
+        location: "Dhaka",
+        category: "it",
+        experience: "mid",
+        description: "We are looking for a talented software developer to join our team. You will be responsible for developing and maintaining our software products.",
+        requirements: [
+            "3+ years of experience in software development",
+            "Proficient in Java and JavaScript",
+            "Experience with web technologies",
+            "Strong problem-solving skills"
+        ]
     }
 ];
 
@@ -60,20 +105,79 @@ const jobDetailsModal = document.getElementById('jobDetailsModal');
 const jobTitle = document.getElementById('jobTitle');
 const jobDetails = document.getElementById('jobDetails');
 const saveJobBtn = document.getElementById('saveJobBtn');
+const closeDetailsBtn = document.getElementById('closeDetailsBtn');
+const savedJobsBtn = document.getElementById('savedJobsBtn');
 
 // Display jobs
 function displayJobs(jobsToShow = jobs) {
-    jobList.innerHTML = jobsToShow.map(job => `
-        <div class="job-card" onclick="showJobDetails(${job.id})">
-            <h3>${job.title}</h3>
-            <p class="company">${job.company}</p>
-            <p class="location"><i class="fas fa-map-marker-alt"></i> ${job.location}</p>
-            <div class="tags">
-                <span class="tag">${getCategoryName(job.category)}</span>
-                <span class="tag">${getExperienceLevel(job.experience)}</span>
+    const jobList = document.getElementById('jobList');
+    jobList.innerHTML = '';
+
+    jobsToShow.forEach(job => {
+        const jobCard = document.createElement('div');
+        jobCard.className = 'job-card';
+        jobCard.innerHTML = `
+            <div class="job-header">
+                <h3>${job.title}</h3>
+                <span>${job.company}</span>
+            </div>
+            <div class="job-info">
+                <span>${job.location}</span>
+                <span>${getCategoryName(job.category)}</span>
+                <span>${getExperienceLevel(job.experience)}</span>
+            </div>
+            <div class="job-actions">
+                <button class="apply-btn" onclick="applyForJob(${job.id})">
+                    Apply Now
+                </button>
+                <button class="save-btn" onclick="saveJob(${job.id})">
+                    <i class="fas fa-bookmark"></i>
+                    Save Job
+                </button>
+            </div>
+        `;
+        
+        jobCard.addEventListener('click', () => showJobDetails(job.id));
+        jobList.appendChild(jobCard);
+    });
+}
+
+// Apply for job
+function applyForJob(jobId) {
+    const job = jobs.find(j => j.id === jobId);
+    if (!job) return;
+
+    // Show confirmation modal
+    const modal = document.createElement('div');
+    modal.className = 'apply-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Apply for ${job.title}</h2>
+            <p>Are you sure you want to apply for this position?</p>
+            <div class="modal-actions">
+                <button onclick="confirmApplication(${jobId})">Confirm</button>
+                <button onclick="closeModal(this)">Cancel</button>
             </div>
         </div>
-    `).join('');
+    `;
+    document.body.appendChild(modal);
+}
+
+// Confirm application
+function confirmApplication(jobId) {
+    const job = jobs.find(j => j.id === jobId);
+    if (!job) return;
+
+    // Here you would typically make an API call to submit the application
+    alert(`Application submitted for ${job.title} at ${job.company}`);
+    closeModal(document.querySelector('.apply-modal'));
+}
+
+// Close modal
+function closeModal(modal) {
+    if (modal) {
+        modal.remove();
+    }
 }
 
 // Show job details
@@ -150,11 +254,70 @@ function getExperienceLevel(level) {
 }
 
 // Event listeners
-document.getElementById('searchBtn').addEventListener('click', filterJobs);
-searchInput.addEventListener('input', filterJobs);
-locationFilter.addEventListener('change', filterJobs);
-categoryFilter.addEventListener('change', filterJobs);
-experienceFilter.addEventListener('change', filterJobs);
+if (document.getElementById('searchBtn')) {
+    document.getElementById('searchBtn').addEventListener('click', filterJobs);
+}
+if (searchInput) {
+    searchInput.addEventListener('input', filterJobs);
+}
+if (locationFilter) {
+    locationFilter.addEventListener('change', filterJobs);
+}
+if (categoryFilter) {
+    categoryFilter.addEventListener('change', filterJobs);
+}
+if (experienceFilter) {
+    experienceFilter.addEventListener('change', filterJobs);
+}
+if (closeDetailsBtn) {
+    closeDetailsBtn.addEventListener('click', () => {
+        jobDetailsModal.style.display = 'none';
+    });
+}
+if (savedJobsBtn) {
+    savedJobsBtn.addEventListener('click', () => {
+        displayJobs(savedJobs);
+    });
+}
+
+// Reset filters
+const resetFiltersBtn = document.getElementById('resetFilters');
+if (resetFiltersBtn) {
+    resetFiltersBtn.addEventListener('click', () => {
+        // Reset all filters
+        if (searchInput) searchInput.value = '';
+        if (locationFilter) locationFilter.value = '';
+        if (categoryFilter) categoryFilter.value = '';
+        if (experienceFilter) experienceFilter.value = '';
+        
+        // Clear saved jobs
+        savedJobs = [];
+        localStorage.removeItem('savedJobs');
+        
+        // Refresh job list
+        displayJobs(jobs);
+        
+        // Show success message
+        const message = document.createElement('div');
+        message.className = 'reset-message';
+        message.textContent = 'Filters reset successfully!';
+        resetFiltersBtn.parentNode.appendChild(message);
+        
+        // Remove message after 2 seconds
+        setTimeout(() => {
+            message.remove();
+        }, 2000);
+    });
+}
+
+// Read More functionality
+const readMoreButtons = document.querySelectorAll('.read-more-btn');
+readMoreButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const post = button.closest('.post');
+        post.classList.toggle('expanded');
+    });
+});
 
 // Close modal
 document.querySelector('.close').addEventListener('click', () => {

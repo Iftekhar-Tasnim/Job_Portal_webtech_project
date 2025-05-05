@@ -10,7 +10,7 @@ html {
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: #333;
     min-height: 100%;
@@ -20,7 +20,7 @@ body {
 
 .main-content {
     flex: 1;
-    padding-top: 60px; /* Space for fixed header */
+    padding-top: 60px; 
 }
 
 /* Colors */
@@ -37,7 +37,7 @@ body {
     --footer-link-hover: #fff;
 }
 
-/* Header Styles */
+
 header {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -79,7 +79,7 @@ nav {
 }
 
 .nav-links a:hover {
-    color: var(--primary-color);
+    color: var(--primary-color); 
 }
 
 .nav-links a.active {
