@@ -1,0 +1,154 @@
+
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Alerts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background: #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 10px 20px;
+            margin: 0 5px;
+        }
+        nav button:hover {
+            background: #0056b3;
+            border-radius: 5px;
+        }
+        section {
+            display: none;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        section.active {
+            display: block;
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input.invalid, select.invalid {
+            border-color: #dc3545;
+        }
+        button[type="submit"] {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button[type="submit"]:hover {
+            background: #0056b3;
+        }
+        article {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        article:last-child {
+            border-bottom: none;
+        }
+        p {
+            margin: 5px 0;
+        }
+        .error {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        .error.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <button onclick="showScreen('alert-preferences')">Alert Preferences</button>
+        <button onclick="showScreen('notification-center')">Notification Center</button>
+        <button onclick="showScreen('recommended-jobs')">Recommended Jobs</button>
+    </nav>
+
+    <section id="alert-preferences" class="active">
+        <h2>Alert Preferences</h2>
+        <form id="preferences-form">
+            <label for="job-title">Job Title:</label>
+            <input type="text" id="job-title" placeholder="e.g., Software Engineer">
+            <p class="error" id="job-title-error">Job title is required.</p>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" placeholder="e.g., New York, NY">
+            <p class="error" id="location-error">Location is required.</p>
+
+            <label for="job-type">Job Type:</label>
+            <select id="job-type">
+                <option value="">Select</option>
+                <option value="full-time">Full-Time</option>
+                <option value="part-time">Part-Time</option>
+                <option value="contract">Contract</option>
+            </select>
+            <p class="error" id="job-type-error">Please select a job type.</p>
+
+            <label for="notification-method">Notification Method:</label>
+            <select id="notification-method">
+                <option value="email">Email</option>
+                <option value="app">App</option>
+                <option value="both">Both</option>
+            </select>
+            <p class="error" id="notification-method-error">Please select a notification method.</p>
+
+            <button type="submit">Save Preferences</button>
+        </form>
+    </section>
+
+    <section id="notification-center">
+        <h2>Notification Center</h2>
+        <article id="notifications"></article>
+    </section>
+
+    <section id="recommended-jobs">
+        <h2>Recommended Jobs</h2>
+        <article id="jobs"></article>
+    </section>
+
+    <script src="alert.js"></script>
+</body>
+</html>
+```

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Portal Login</title>
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="welcome-section">
+            <h2>Welcome to Job Portal</h2>
+            <p>Please sign in to continue</p>
+        </div>
+        <div class="login-options">
+            <button class="login-option active" data-type="applicant">Applicant Login</button>
+            <button class="login-option" data-type="employer">Employer Login</button>
+        </div>
+        <div class="login-panels">
+            <div class="login-panel active" id="applicantLogin">
+                <form id="applicantLoginForm">
+                    <div class="input-group">
+                        <label for="applicantEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="applicantEmail" required>
+                        <div class="validation-message" id="applicantEmailError">Please enter a valid email address.</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="applicantPassword"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="applicantPassword" required>
+                        <div class="validation-message" id="applicantPasswordError">Password is required.</div>
+                    </div>
+                    <div class="form-actions">
+                        <a href="./forgetpass.html" class="password-reset-link">Forgot Password?</a>
+                        <button type="submit" class="submit-button">Login as Applicant</button>
+                    </div>
+                </form>
+            </div>
+            <div class="login-panel" id="employerLogin">
+                <form id="employerLoginForm">
+                    <div class="input-group">
+                        <label for="employerEmail"><i class="fas fa-envelope"></i> Company Email</label>
+                        <input type="email" id="employerEmail" required>
+                        <div class="validation-message" id="employerEmailError">Please enter a valid email address.</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="employerPassword"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="employerPassword" required>
+                        <div class="validation-message" id="employerPasswordError">Password is required.</div>
+                    </div>
+                    <div class="form-actions">
+                        <a href="./forgetpass.html" class="password-reset-link">Forgot Password?</a>
+                        <button type="submit" class="submit-button">Login as Employer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="registration-link">
+            <p>New to Job Portal? <a href="./Registration.html">Create an account</a></p>
+        </div>
+    </div>
+    <script src="./Js/login.js"></script>
+</body>
+</html>

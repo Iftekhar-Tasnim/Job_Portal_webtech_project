@@ -1,0 +1,71 @@
+Job Portal
+
+1. Job Listings
+   Screens: Job Board, Detailed Listing View, Search Filters
+   Interaction:
+   - Browse/search open positions
+   - View full job descriptions/requirements
+   - Save interesting postings
+
+2. Resume Upload
+   Screens: Resume Builder, File Uploader, Profile Completeness Meter
+   Interaction:
+   - Upload existing resume (PDF/DOC)
+   - Create new resume using templates
+   - Track profile strength score
+
+3. Application Tracking
+   Screens: Application Status Board, Employer Actions Log, Follow-up Reminders
+   Interaction:
+   - View submitted applications
+   - Track employer review status
+   - Set reminders for follow-ups
+
+4. Company Profiles
+   Screens: Employer Overview, Employee Reviews, Open Positions List
+   Interaction:
+   - Research company culture
+   - Read anonymous employee reviews
+   - See all current openings
+
+5. Salary Ranges
+   Screens: Compensation Estimator, Role Comparison Tool, Benefits Breakdown
+   Interaction:
+   - View salary data by position/location
+   - Compare offers side-by-side
+   - Evaluate total compensation packages
+
+6. Job Alerts
+   Screens: Alert Preferences, Notification Center, Recommended Jobs
+   Interaction:
+   - Set criteria for ideal positions
+   - Receive email/app notifications
+   - Discover relevant new postings
+
+7. Interview Scheduling
+   Screens: Calendar Sync, Availability Selector, Confirmation Page
+   Interaction:
+   - Share available time slots
+   - Book interviews with employers
+   - Get calendar invites
+
+8. Saved Searches
+   Screens: Search History, Saved Query Manager, Auto-Refresh Toggle
+   Interaction:
+   - Store favorite search parameters
+   - Get updates when new matches appear
+   - Organize by job categories
+
+9. Employer Dashboard
+   Screens: Job Posting Manager, Applicant Pipeline, Performance Analytics
+   Interaction:
+   - Create/edit job postings
+   - Review candidate applications
+   - Track listing performance
+
+10. Career Resources
+    Screens: Resume Tips, Interview Prep, Salary Negotiation Guide
+    Interaction:
+    - Access expert advice articles
+    - Watch instructional videos
+    - Download templates/checklists

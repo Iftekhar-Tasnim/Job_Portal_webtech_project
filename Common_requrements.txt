@@ -1,0 +1,107 @@
+Common Features (All Projects)
+
+1. User Authentication
+   Description: Secure login/registration system
+   Screens: Login, Signup, Forgot Password, Reset Password, Email Verification
+   Interaction:
+   - New users: Signup → verify email → login
+   - Existing users: Enter credentials → access account
+   - Password recovery: Request reset → follow email link → set new password
+
+2. Profile Management
+   Description: Edit personal details and profile picture
+   Screens: View Profile, Edit Profile, Change Avatar, Update Password
+   Interaction:
+   - Click "Edit Profile" → update fields → save changes
+   - Upload image → crop/resize → set as profile picture
+
+3. Role-Based Access
+   Description: Different permissions for admins/users
+   Screens: Permission Settings, Role Assignment
+   Interaction:
+   - Admin: Assign roles (Admin/Editor/User) to accounts
+   - Users: See only permitted features in navigation
+
+4. Dashboard
+   Description: Overview of key activities and stats
+   Screens: Home Dashboard, Analytics Overview, Quick Actions
+   Interaction:
+   - View summary widgets → click to see details
+   - Use shortcuts for common tasks
+
+5. Notifications
+   Description: Email/in-app alerts for important actions
+   Screens: Notification Center, Notification Settings
+   Interaction:
+   - Bell icon shows unread count → click to view
+   - Toggle notification types (email/push)
+
+6. Contact Us Form
+   Description: Page for users to submit inquiries
+   Screens: Contact Form, Submission Confirmation
+   Interaction:
+   - Fill form fields → CAPTCHA verification → submit
+   - Auto-receipt email sent to user
+
+7. Landing Page
+   Description: Public homepage explaining the system
+   Screens: Main Landing, Features, Testimonials
+   Interaction:
+   - Scroll through sections → click CTA buttons
+   - Navigation to key sections (About, Signup)
+
+8. Admin Panel
+   Description: Backend interface for managing data
+   Screens: User Management, Content Moderation, System Settings
+   Interaction:
+   - Filter/sort records → bulk actions
+   - Access advanced configuration options
+
+9. Search & Filter
+   Description: Find items using keywords/categories
+   Screens: Search Bar, Filter Panel, Results List
+   Interaction:
+   - Type query → see live results
+   - Apply filters → refine results
+
+10. Pagination
+    Description: Split long lists into manageable pages
+    Screens: Pagination Controls, Items Per Page Selector
+    Interaction:
+    - Click page numbers → load new set
+    - Change items per page (10/25/50)
+
+11. Responsive Design
+    Description: Works on mobile/tablet/desktop
+    Screens: Adaptive Layouts, Mobile Menu
+    Interaction:
+    - Elements reposition based on screen size
+    - Hamburger menu on mobile → expands navigation
+
+12. Form Validation
+    Description: Ensures correct data input
+    Screens: Error Messages, Success States
+    Interaction:
+    - Real-time feedback on invalid fields
+    - Submission prevented until all valid
+
+13. Error Pages
+    Description: Custom 404/500 error screens
+    Screens: 404 Not Found, 500 Server Error
+    Interaction:
+    - Clear error message → suggested actions
+    - Navigation back to safety
+
+14. Activity Logs
+    Description: Tracks user actions for security
+    Screens: Audit Trail, Export Logs
+    Interaction:
+    - Filter by date/user/action type
+    - Export for compliance purposes
+
+15. Data Export
+    Description: Download reports as PDF/CSV
+    Screens: Export Wizard, Format Options
+    Interaction:
+    - Select data range → choose format → download
+    - Scheduled exports available
