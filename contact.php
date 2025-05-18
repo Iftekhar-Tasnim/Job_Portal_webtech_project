@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+// Check if user is logged in
+$isLoggedIn = isset($_SESSION['user_id']);
+$userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +17,6 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-
     <!-- Header -->
     <header>
         <nav>
@@ -18,16 +24,28 @@
                 <h1>Employify</h1>
             </div>
             <ul class="nav-links">
-                <li><a href="./index.html" class="active">Home</a></li>
-                <li><a href="./jobs.html">Find a Job</a></li>
-                <li><a href="./about.html">About</a></li>
-                <li><a href="./career-resources.html">Career Resources</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-                <li><a href="./cv-maker.html">CV Maker</a></li>
+                <li><a href="./index.php">Home</a></li>
+                <li><a href="./jobs.php">Find a Job</a></li>
+                <li><a href="./about.php">About</a></li>
+                <li><a href="./career-resources.php">Career Resources</a></li>
+                <li><a href="./contact.php" class="active">Contact</a></li>
+                <li><a href="./cv-maker.php">CV Maker</a></li>
             </ul>
             <div class="user-actions">
-                <a href="./login.html" class="login-btn">Login</a>
-                <a href="./Registration.html" class="register-btn">Register</a>
+                <?php if ($isLoggedIn): ?>
+                    <div class="user-menu">
+                        <span class="welcome-text">Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'User'); ?></span>
+                        <?php if ($userType === 'employer'): ?>
+                            <a href="./employer-dashboard.php" class="dashboard-btn">Dashboard</a>
+                        <?php else: ?>
+                            <a href="./applicant-dashboard.php" class="dashboard-btn">Dashboard</a>
+                        <?php endif; ?>
+                        <a href="./logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                <?php else: ?>
+                    <a href="./login.php" class="login-btn">Login</a>
+                    <a href="./Registration.php" class="register-btn">Register</a>
+                <?php endif; ?>
             </div>
         </nav>
     </header>
@@ -68,15 +86,15 @@
                     </div>
 
                     <div class="contact-form">
-                        <form id="contactForm" class="form">
+                        <form id="contactForm" class="form" action="process_contact.php" method="POST">
                             <div class="form-group">
                                 <label for="name">Full Name</label>
-                                <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="name" value="<?php echo $isLoggedIn ? htmlspecialchars($_SESSION['user_name']) : ''; ?>" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" required>
+                                <input type="email" id="email" name="email" value="<?php echo $isLoggedIn ? htmlspecialchars($_SESSION['user_email']) : ''; ?>" required>
                             </div>
 
                             <div class="form-group">
@@ -110,11 +128,10 @@
                 </div>
             </div>
         </div>
-    </div>
     </main>
 
-     <!-- Footer -->
-     <footer class="footer">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Employify</h3>
@@ -124,12 +141,12 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./jobs.html">Find a Job</a></li>
-                    <li><a href="./about.html">About</a></li>
-                    <li><a href="./career-resources.html">Career Resources</a></li>
-                    <li><a href="./contact.html">Contact</a></li>
-                    <li><a href="./cv-maker.html">CV Maker</a></li>
+                    <li><a href="./index.php">Home</a></li>
+                    <li><a href="./jobs.php">Find a Job</a></li>
+                    <li><a href="./about.php">About</a></li>
+                    <li><a href="./career-resources.php">Career Resources</a></li>
+                    <li><a href="./contact.php">Contact</a></li>
+                    <li><a href="./cv-maker.php">CV Maker</a></li>
                 </ul>
             </div>
 
@@ -148,9 +165,9 @@
         <div class="footer-bottom">
             <p>&copy; 2025 Employify. All rights reserved.</p>
         </div>
-     </footer>
+    </footer>
 
-    <script src="../Js/auth.js"></script>
-    <script src="./Js/contact.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/contact.js"></script>
 </body>
-</html>
+</html> 
