@@ -1,11 +1,9 @@
 <?php
-session_start();
-
-// Check if user is logged in
-$isLoggedIn = isset($_SESSION['user_id']);
-$userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : '';
-$companyId = isset($_GET['id']) ? $_GET['id'] : '';
+    session_start();
+    if(isset($_SESSION['status'])){
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -228,3 +226,10 @@ $companyId = isset($_GET['id']) ? $_GET['id'] : '';
     <script src="../assets/js/company-profile.js"></script>
 </body>
 </html>
+
+<?php
+    }else{
+        header('location: login.php');
+    }
+
+?>

@@ -1,9 +1,6 @@
 <?php
-session_start();
-
-// Check if user is logged in
-$isLoggedIn = isset($_SESSION['user_id']);
-$userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : '';
+    session_start();
+    if(isset($_SESSION['status'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -426,3 +423,10 @@ Experienced software developer with expertise in frontend development and proble
     <script src="/js/profile.js"></script>
   </body>
 </html>
+
+<?php
+    }else{
+        header('location: login.php');
+    }
+
+?>

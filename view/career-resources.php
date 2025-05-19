@@ -1,14 +1,6 @@
 <?php
-session_start();
-
-// Check if user is logged in
-$isLoggedIn = isset($_SESSION['user_id']);
-$userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : '';
-
-$title = 'Career Resources - Employify Job Portal';
-$page_css = 'career-resources';
-$page_js = 'blog-posts';
-ob_start();
+    session_start();
+    if(isset($_SESSION['status'])){
 ?>
 
 <!DOCTYPE html>
@@ -164,3 +156,10 @@ ob_start();
     <script src="../assets/js/blog-posts.js"></script>
 </body>
 </html>
+
+<?php
+    }else{
+        header('location: login.php');
+    }
+
+?>
