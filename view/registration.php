@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registration Page</title>
-    <link rel="stylesheet" href="./styles/registration.css" />
+    <link rel="stylesheet" href="../assets/css/registration.css" />
     <script src="./Js/registration.js"></script>
   </head>
   <body>
@@ -129,7 +129,7 @@
           </div>
 
           <p class="login_page">
-            Already have an account? <a href="./login.html">Login here</a>
+            Already have an account? <a href="login.php">Login here</a>
           </p>
         </fieldset>
       </div>
@@ -248,7 +248,7 @@
           </div>
 
           <p class="login_page">
-            Already have an account? <a href="./login.html">Login here</a>
+            Already have an account? <a href="login.php">Login here</a>
           </p>
         </fieldset>
       </div>

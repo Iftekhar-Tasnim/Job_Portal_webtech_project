@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Portal Login</title>
-    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="validation-message" id="applicantPasswordError">Password is required.</div>
                     </div>
                     <div class="form-actions">
-                        <a href="./forgetpass.php" class="password-reset-link">Forgot Password?</a>
+                        <a href="forgetpass.php" class="password-reset-link">Forgot Password?</a>
                         <button type="submit" class="submit-button">Login as Applicant</button>
                     </div>
                 </form>
@@ -107,14 +107,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="validation-message" id="employerPasswordError">Password is required.</div>
                     </div>
                     <div class="form-actions">
-                        <a href="./forgetpass.php" class="password-reset-link">Forgot Password?</a>
+                        <a href="forgetpass.php" class="password-reset-link">Forgot Password?</a>
                         <button type="submit" class="submit-button">Login as Employer</button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="registration-link">
-            <p>New to Job Portal? <a href="./Registration.php">Create an account</a></p>
+            <p>New to Job Portal? <a href="Registration.php">Create an account</a></p>
         </div>
     </div>
     <script src="./Js/login.js"></script>

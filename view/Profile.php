@@ -1,12 +1,19 @@
+<?php
+session_start();
+
+// Check if user is logged in
+$isLoggedIn = isset($_SESSION['user_id']);
+$userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : '';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Profile - Employify</title>
-    <link rel="stylesheet" href="./styles/style.css" />
-    <link rel="stylesheet" href="./styles/nav-footer.css" />
-    <link rel="stylesheet" href="./styles/profile.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/nav-footer.css" />
+    <link rel="stylesheet" href="../assets/css/profile.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -15,23 +22,35 @@
   <body>
     <!-- Header -->
     <header>
-      <nav>
-        <div class="logo">
-          <h1>Employify</h1>
-        </div>
-        <ul class="nav-links">
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./jobs.html">Find a Job</a></li>
-          <li><a href="./about.html">About</a></li>
-          <li><a href="./career-resources.html">Career Resources</a></li>
-          <li><a href="./contact.html">Contact</a></li>
-          <li><a href="./cv-maker.html">CV Maker</a></li>
-        </ul>
-        <div class="user-actions">
-          <a href="./profile.html" class="profile-btn">My Profile</a>
-          <a href="./logout.html" class="logout-btn">Logout</a>
-        </div>
-      </nav>
+    <nav>
+            <div class="logo">
+                <h1>Employify</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.php">Home</a></li>
+                <li><a href="jobs.php">Find a Job</a></li>
+                <li><a href="about.php" class="active">About</a></li>
+                <li><a href="career-resources.php">Career Resources</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                <li><a href="cv-maker.php">CV Maker</a></li>
+            </ul>
+            <div class="user-actions">
+                <?php if ($isLoggedIn): ?>
+                    <div class="user-menu">
+                        <span class="welcome-text">Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'User'); ?></span>
+                        <?php if ($userType === 'employer'): ?>
+                            <a href="employer-dashboard.php" class="dashboard-btn">Dashboard</a>
+                        <?php else: ?>
+                            <a href="applicant-dashboard.php" class="dashboard-btn">Dashboard</a>
+                        <?php endif; ?>
+                        <a href="logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                <?php else: ?>
+                   <a href="login.php" class="login-btn">Login</a>
+                    <a href="Registration.php" class="register-btn">Register</a>
+                <?php endif; ?>
+            </div>
+        </nav>
     </header>
 
     <main class="main-content">
@@ -40,7 +59,7 @@
           <div class="profile-header">
             <div class="profile-image">
                 <img
-                  src="./asstes/123.jpg"
+                  src="/assets/123.jpg"
                   alt="Profile Picture"
                   id="profilePic"
                 />
@@ -154,7 +173,7 @@
                     <div class="application-card">
                       <div class="app-header">
                         <div class="app-company">
-                          <img src="./asstes/g.png" alt="Company Logo">
+                          <img src="/assets/g.png" alt="Company Logo">
                           <div class="company-info">
                             <h3>Google</h3>
                             <p>Senior Software Engineer</p>
@@ -202,7 +221,7 @@
                     <div class="application-card">
                       <div class="app-header">
                         <div class="app-company">
-                          <img src="./asstes/m.png" alt="Company Logo">
+                          <img src="/assets/m.png" alt="Company Logo">
                           <div class="company-info">
                             <h3>Microsoft</h3>
                             <p>Frontend Developer</p>
@@ -377,12 +396,12 @@ Experienced software developer with expertise in frontend development and proble
         <div class="footer-section">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./jobs.html">Find a Job</a></li>
-            <li><a href="./about.html">About</a></li>
-            <li><a href="./career-resources.html">Career Resources</a></li>
-            <li><a href="./contact.html">Contact</a></li>
-            <li><a href="./cv-maker.html">CV Maker</a></li>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="jobs.php">Find a Job</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="career-resources.php">Career Resources</a></li>
+            <li><a href="contact.php">Contact</a></li>
+            <li><a href="cv-maker.php">CV Maker</a></li>
           </ul>
         </div>
 
@@ -399,11 +418,11 @@ Experienced software developer with expertise in frontend development and proble
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Employify. All rights reserved.</p>
+        <p>&copy; <?php echo date('Y'); ?> Employify. All rights reserved.</p>
       </div>
     </footer>
 
-    <script src="./Js/auth.js"></script>
-    <script src="./Js/profile.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/profile.js"></script>
   </body>
 </html>

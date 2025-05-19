@@ -4,47 +4,53 @@ session_start();
 // Check if user is logged in
 $isLoggedIn = isset($_SESSION['user_id']);
 $userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : '';
+
+$title = 'About Us - Employify Job Portal';
+$page_css = 'about';
+$page_js = 'about';
+ob_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Employify Job Portal</title>
-    <link rel="stylesheet" href="./styles/style.css">
-    <link rel="stylesheet" href="./styles/nav-footer.css">
-    <link rel="stylesheet" href="./styles/about.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/nav-footer.css">
+    <link rel="stylesheet" href="../assets/css/about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
     <header>
-        <nav>
+    <nav>
             <div class="logo">
                 <h1>Employify</h1>
             </div>
             <ul class="nav-links">
-                <li><a href="./index.php">Home</a></li>
-                <li><a href="./jobs.php">Find a Job</a></li>
-                <li><a href="./about.php" class="active">About</a></li>
-                <li><a href="./career-resources.php">Career Resources</a></li>
-                <li><a href="./contact.php">Contact</a></li>
-                <li><a href="./cv-maker.php">CV Maker</a></li>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="jobs.php">Find a Job</a></li>
+                <li><a href="about.php" class="active">About</a></li>
+                <li><a href="career-resources.php">Career Resources</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                <li><a href="cv-maker.php">CV Maker</a></li>
             </ul>
             <div class="user-actions">
                 <?php if ($isLoggedIn): ?>
                     <div class="user-menu">
                         <span class="welcome-text">Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'User'); ?></span>
                         <?php if ($userType === 'employer'): ?>
-                            <a href="./employer-dashboard.php" class="dashboard-btn">Dashboard</a>
+                            <a href="employer-dashboard.php" class="dashboard-btn">Dashboard</a>
                         <?php else: ?>
-                            <a href="./applicant-dashboard.php" class="dashboard-btn">Dashboard</a>
+                            <a href="applicant-dashboard.php" class="dashboard-btn">Dashboard</a>
                         <?php endif; ?>
-                        <a href="./logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a href="logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>
                 <?php else: ?>
-                    <a href="./login.php" class="login-btn">Login</a>
-                    <a href="./Registration.php" class="register-btn">Register</a>
+                   <a href="login.php" class="login-btn">Login</a>
+                    <a href="Registration.php" class="register-btn">Register</a>
                 <?php endif; ?>
             </div>
         </nav>
@@ -94,17 +100,17 @@ $userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : '';
                 <h2>Our Leadership Team</h2>
                 <div class="team-grid">
                     <div class="team-member">
-                        <img src="./asstes/images/team/ceo.jpg" alt="CEO">
+                        <img src="/assets/123.jpg" alt="CEO">
                         <h3>John Smith</h3>
                         <p>Chief Executive Officer</p>
                     </div>
                     <div class="team-member">
-                        <img src="./asstes/images/team/cto.jpg" alt="CTO">
+                        <img src="/assets/g.png" alt="CTO">
                         <h3>Sarah Johnson</h3>
                         <p>Chief Technology Officer</p>
                     </div>
                     <div class="team-member">
-                        <img src="./asstes/images/team/coo.jpg" alt="COO">
+                        <img src="/assets/m.png" alt="COO">
                         <h3>Michael Chen</h3>
                         <p>Chief Operations Officer</p>
                     </div>
@@ -150,7 +156,8 @@ $userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : '';
         </div>
     </footer>
 
-    <script src="./js/auth.js"></script>
-    <script src="./js/about.js"></script>
+    
+    <script src="../assets/js/about.js"></script>
 </body>
-</html> 
+</html>
+
