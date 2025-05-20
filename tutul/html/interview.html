@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Scheduler</title>
+    <!-- Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007bff; /* Changed to blue */
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        header nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.8em;
+        }
+        header .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        header .nav-links li {
+            margin-left: 20px;
+        }
+        header .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        header .nav-links a:hover {
+            color: #f0f0f0;
+        }
+        header .user-actions a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            margin-left: 10px;
+            border-radius: 5px;
+        }
+        header .user-actions .login-btn {
+            background-color: #0056b3; /* Darker blue for login button */
+        }
+        header .user-actions .login-btn:hover {
+            background-color: #003d82; /* Even darker blue on hover */
+        }
+        header .user-actions .register-btn {
+            background-color: #555;
+        }
+        header .user-actions .register-btn:hover {
+            background-color: #777;
+        }
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        section {
+            display: none;
+        }
+        section.active {
+            display: block;
+        }
+        form {
+            margin: 20px 0;
+            text-align: center;
+        }
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        input[type="date"], input[type="time"] {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        button {
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #4CAF50; /* Kept green for main buttons */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        p#calendar-invite {
+            text-align: center;
+            font-size: 18px;
+            color: #4CAF50;
+        }
+        p.error {
+            color: red;
+            text-align: center;
+            display: none;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+            margin-top: 20px;
+        }
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+        .footer-section h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .footer-section p {
+            margin: 5px 0;
+        }
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .footer-section ul li a:hover {
+            color: #007bff; /* Blue hover effect for footer links */
+        }
+        .social-links {
+            margin-top: 10px;
+        }
+        .social-icon {
+            color: white;
+            margin-right: 10px;
+            font-size: 1.2em;
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            color: #007bff; /* Blue hover effect for social icons */
+        }
+        .footer-bottom {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #222;
+            margin-top: 20px;
+        }
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Employify</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./jobs.html">Find a Job</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./career-resources.html">Career Resources</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="./cv-maker.html">CV Maker</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="./login.html" class="login-btn">Login</a>
+                <a href="./Registration.html" class="register-btn">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Interview Scheduler</h1>
+
+        <!-- Calendar Sync Screen -->
+        <section id="calendar-sync" class="active">
+            <h2>Sync Your Calendar</h2>
+            <p>Connect your calendar to share your availability.</p>
+            <button onclick="syncCalendar()">Sync Calendar</button>
+        </section>
+
+        <!-- Availability Selector Screen -->
+        <section id="availability">
+            <h2>Select Your Availability</h2>
+            <form>
+                <label for="date-input">Date:</label>
+                <input type="date" id="date-input" min="2025-05-06">
+                <br>
+                <label for="time-input">Time:</label>
+                <input type="time" id="time-input">
+            </form>
+            <p id="error-message" class="error">Please select a valid date and time.</p>
+            <button onclick="bookInterview()">Book Interview</button>
+        </section>
+
+        <!-- Confirmation Page -->
+        <section id="confirmation">
+            <h2>Booking Confirmed!</h2>
+            <p id="confirmation-details"></p>
+            <p id="calendar-invite">Calendar invite sent!</p>
+            <button onclick="startOver()">Schedule Another Interview</button>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Employify</h3>
+                <p>Find your dream job with Employify. Connect with top employers and start your career journey today.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./jobs.html">Find a Job</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./career-resources.html">Career Resources</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./cv-maker.html">CV Maker</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@employify.com</p>
+                <p>Phone: +8801711111111</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Employify. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="interview.js"></script>
+</body>
+</html>
