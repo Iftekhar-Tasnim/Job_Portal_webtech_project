@@ -18,34 +18,23 @@
 <body>
     <!-- Header -->
     <header>
-        <nav>
+    <nav>
             <div class="logo">
                 <h1>Employify</h1>
             </div>
             <ul class="nav-links">
                 <li><a href="home.php">Home</a></li>
                 <li><a href="jobs.php">Find a Job</a></li>
-                <li><a href="about.php">About</a></li>
+                <li><a href="about.php" class="active">About</a></li>
                 <li><a href="career-resources.php">Career Resources</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="cv-maker.php">CV Maker</a></li>
             </ul>
             <div class="user-actions">
-                <?php if ($isLoggedIn): ?>
-                    <div class="user-menu">
-                        <span class="welcome-text">Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'User'); ?></span>
-                        <?php if ($userType === 'employer'): ?>
-                            <a href="employer-dashboard.php" class="dashboard-btn">Dashboard</a>
-                        <?php else: ?>
-                            <a href="applicant-dashboard.php" class="dashboard-btn">Dashboard</a>
-                        <?php endif; ?>
-                        <a href="logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                    </div>
-                <?php else: ?>
-                    <a href="login.php" class="login-btn">Login</a>
-                    <a href="Registration.php" class="register-btn">Register</a>
-                <?php endif; ?>
-            </div>
+    <a href="login.php" class="login-btn">Login</a>
+    <a href="Registration.php" class="register-btn">Register</a>
+</div>
+
         </nav>
     </header>
 
