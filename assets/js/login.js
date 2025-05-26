@@ -67,17 +67,109 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   document.addEventListener('DOMContentLoaded', function() {
-    // Handle login option switching
+    // Get all login options and panels
     const loginOptions = document.querySelectorAll('.login-option');
     const loginPanels = document.querySelectorAll('.login-panel');
 
+    // Add click event listeners to login options
     loginOptions.forEach(option => {
         option.addEventListener('click', function() {
-            const type = this.dataset.type;
+            // Remove active class from all options and panels
             loginOptions.forEach(opt => opt.classList.remove('active'));
-            this.classList.add('active');
             loginPanels.forEach(panel => panel.classList.remove('active'));
-            document.getElementById(`${type}Login`).classList.add('active');
+
+            // Add active class to clicked option
+            this.classList.add('active');
+
+            // Show corresponding panel
+            const panelId = this.dataset.type + 'Login';
+            document.getElementById(panelId).classList.add('active');
+        });
+    });
+
+    // Simple email validation without regex
+    const validateEmail = (email) => {
+        if (!email || email.trim() === "") {
+            return false;
+        }
+
+        // Check for @ and . in email
+        if (!email.includes('@') || !email.includes('.')) {
+            return false;
+        }
+
+        // Check if @ is not at start or end
+        const atIndex = email.indexOf('@');
+        if (atIndex === 0 || atIndex === email.length - 1) {
+            return false;
+        }
+
+        // Check if . is not at start or end
+        const dotIndex = email.lastIndexOf('.');
+        if (dotIndex === 0 || dotIndex === email.length - 1) {
+            return false;
+        }
+
+        // Check if . comes after @
+        if (dotIndex < atIndex) {
+            return false;
+        }
+
+        return true;
+    };
+
+    // Password validation
+    const validatePassword = (password) => {
+        if (!password || password.trim() === "") {
+            return false;
+        }
+
+        if (password.trim().length < 6) {
+            return false;
+        }
+
+        return true;
+    };
+
+    // Form validation
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            const email = this.querySelector('input[type="email"]').value;
+            const password = this.querySelector('input[type="password"]').value;
+            const emailError = this.querySelector('input[type="email"]').nextElementSibling;
+            const passwordError = this.querySelector('input[type="password"]').nextElementSibling;
+            let isValid = true;
+
+            // Email validation
+            if (!validateEmail(email)) {
+                emailError.textContent = "Please enter a valid email address";
+                emailError.style.display = 'block';
+                isValid = false;
+            } else {
+                emailError.style.display = 'none';
+            }
+
+            // Password validation
+            if (!validatePassword(password)) {
+                passwordError.textContent = "Password must be at least 6 characters long";
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else {
+                passwordError.style.display = 'none';
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+    });
+
+    // Hide validation messages on input
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            this.nextElementSibling.style.display = 'none';
         });
     });
 

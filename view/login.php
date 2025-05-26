@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +18,12 @@
             <button class="login-option" data-type="employer">Employer Login</button>
         </div>
         <div class="login-panels">
+            <?php
+            if (isset($_SESSION['login_error'])) {
+                echo '<div class="error-message">' . htmlspecialchars($_SESSION['login_error']) . '</div>';
+                unset($_SESSION['login_error']);
+            }
+            ?>
             <div class="login-panel active" id="applicantLogin">
                 <form id="applicantLoginForm" action="../controller/logincheck.php" method="POST">
                     <input type="hidden" name="user_type" value="applicant">
@@ -36,7 +39,7 @@
                     </div>
                     <div class="form-actions">
                         <a href="forgetpass.php" class="password-reset-link">Forgot Password?</a>
-                        <button type="submit" class="submit-button">Login as Applicant</button>
+                        <button type="submit" class="submit-button" name="submit">Login as Applicant</button>
                     </div>
                 </form>
             </div>
@@ -55,15 +58,15 @@
                     </div>
                     <div class="form-actions">
                         <a href="forgetpass.php" class="password-reset-link">Forgot Password?</a>
-                        <button type="submit" class="submit-button">Login as Employer</button>
+                        <button type="submit" class="submit-button" name="submit">Login as Employer</button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="registration-link">
-            <p>New to Job Portal? <a href="Registration.php">Create an account</a></p>
+            <p>New to Job Portal? <a href="registration.php">Create an account</a></p>
         </div>
     </div>
-    <script src="./Js/login.js"></script>
+    <script src="../assets/js/login.js"></script>
 </body>
 </html> 
