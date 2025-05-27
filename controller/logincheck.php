@@ -1,62 +1,64 @@
 <?php
 session_start();
 require_once '../model/user_model.php';
+require_once '../model/validation.php';
 
 if (isset($_POST['submit'])) {
-   
-    if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['user_type'])) {
+    $errors = [];
+    
+    // Get and sanitize inputs
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+    $user_type = isset($_POST['user_type']) ? trim($_POST['user_type']) : '';
+    
+    // Validate email
+    $emailError = validateEmail($email);
+    if($emailError !== "") {
+        $errors['email'] = $emailError;
+    }
+    
+    // Validate password
+    $passwordError = validatePassword($password);
+    if($passwordError !== "") {
+        $errors['password'] = $passwordError;
+    }
+    
+    // Validate user type
+    if(!in_array($user_type, ['applicant', 'employer'])) {
+        $errors['user_type'] = "Invalid user type";
+    }
+    
+    // If there are any errors, redirect back with error messages
+    if(!empty($errors)) {
+        $_SESSION['login_errors'] = $errors;
+        header('Location: ../view/login.php');
+        exit();
+    }
+    
+    // If validation passes, attempt login
+    $user = [
+        'email' => $email,
+        'password' => $password,
+        'user_type' => $user_type
+    ];
+    
+    if (login($user)) {
+        // Set session variables
+        $_SESSION['status'] = true;
+        $_SESSION['last_activity'] = time();
+        $_SESSION['expire_time'] = 30 * 60; // 30 minutes
         
-        $email = trim($_POST['email']);
-        $password = trim($_POST['password']);
-        $user_type = trim($_POST['user_type']);
-
-        // Validate inputs
-        if (empty($email) || empty($password)) {
-            $_SESSION['login_error'] = "Email and password are required!";
-            header('Location: ../view/login.php?error=empty');
-            exit();
-        }
-
-        
-        if (!strpos($email, '@') || !strpos($email, '.')) {
-            $_SESSION['login_error'] = "Invalid email format!";
-            header('Location: ../view/login.php?error=invalid_email');
-            exit();
-        }
-
-        if (strlen($password) < 6) {
-            $_SESSION['login_error'] = "Password must be at least 6 characters long!";
-            header('Location: ../view/login.php?error=short_password');
-            exit();
-        }
-
-        $user = [
-            'email' => $email,
-            'password' => $password,
-            'user_type' => $user_type
-        ];
-
-        if (login($user)) {
-            // Set session timeout (30 minutes)
-            $_SESSION['last_activity'] = time();
-            $_SESSION['expire_time'] = 30 * 60; // 30 minutes in seconds
-
-            // Redirect to home page after successful login
-            header('Location: ../view/home.php');
-            exit();
-        } else {
-            $_SESSION['login_error'] = "Invalid email or password!";
-            header('Location: ../view/login.php?error=invalid_credentials');
-            exit();
-        }
+        // Redirect to home page
+        header('Location: ../view/home.php');
+        exit();
     } else {
-        $_SESSION['login_error'] = "Missing required fields!";
-        header('Location: ../view/login.php?error=missing_fields');
+        $_SESSION['login_error'] = "Invalid email or password!";
+        header('Location: ../view/login.php');
         exit();
     }
 } else {
-    $_SESSION['login_error'] = "Invalid request! Please submit the form!";
-    header('Location: ../view/login.php?error=invalid_request');
+    $_SESSION['login_error'] = "Please submit the form properly!";
+    header('Location: ../view/login.php');
     exit();
 }
 ?>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,23 +22,33 @@
         </div>
         <div class="login-panels">
             <?php
+            // Display general login error if any
             if (isset($_SESSION['login_error'])) {
                 echo '<div class="error-message">' . htmlspecialchars($_SESSION['login_error']) . '</div>';
                 unset($_SESSION['login_error']);
             }
+            
+            // Get validation errors if any
+            $errors = isset($_SESSION['login_errors']) ? $_SESSION['login_errors'] : [];
+            unset($_SESSION['login_errors']);
             ?>
             <div class="login-panel active" id="applicantLogin">
                 <form id="applicantLoginForm" action="../controller/logincheck.php" method="POST">
                     <input type="hidden" name="user_type" value="applicant">
                     <div class="input-group">
                         <label for="applicantEmail"><i class="fas fa-envelope"></i> Email Address</label>
-                        <input type="email" id="applicantEmail" name="email" required>
-                        <div class="validation-message" id="applicantEmailError">Please enter a valid email address.</div>
+                        <input type="email" id="applicantEmail" name="email" required 
+                               value="<?php echo isset($_SESSION['old_input']['email']) ? htmlspecialchars($_SESSION['old_input']['email']) : ''; ?>">
+                        <?php if(isset($errors['email'])): ?>
+                            <div class="validation-message error"><?php echo htmlspecialchars($errors['email']); ?></div>
+                        <?php endif; ?>
                     </div>
                     <div class="input-group">
                         <label for="applicantPassword"><i class="fas fa-lock"></i> Password</label>
                         <input type="password" id="applicantPassword" name="password" required>
-                        <div class="validation-message" id="applicantPasswordError">Password is required.</div>
+                        <?php if(isset($errors['password'])): ?>
+                            <div class="validation-message error"><?php echo htmlspecialchars($errors['password']); ?></div>
+                        <?php endif; ?>
                     </div>
                     <div class="form-actions">
                         <a href="forgetpass.php" class="password-reset-link">Forgot Password?</a>
@@ -48,13 +61,18 @@
                     <input type="hidden" name="user_type" value="employer">
                     <div class="input-group">
                         <label for="employerEmail"><i class="fas fa-envelope"></i> Company Email</label>
-                        <input type="email" id="employerEmail" name="email" required>
-                        <div class="validation-message" id="employerEmailError">Please enter a valid email address.</div>
+                        <input type="email" id="employerEmail" name="email" required
+                               value="<?php echo isset($_SESSION['old_input']['email']) ? htmlspecialchars($_SESSION['old_input']['email']) : ''; ?>">
+                        <?php if(isset($errors['email'])): ?>
+                            <div class="validation-message error"><?php echo htmlspecialchars($errors['email']); ?></div>
+                        <?php endif; ?>
                     </div>
                     <div class="input-group">
                         <label for="employerPassword"><i class="fas fa-lock"></i> Password</label>
                         <input type="password" id="employerPassword" name="password" required>
-                        <div class="validation-message" id="employerPasswordError">Password is required.</div>
+                        <?php if(isset($errors['password'])): ?>
+                            <div class="validation-message error"><?php echo htmlspecialchars($errors['password']); ?></div>
+                        <?php endif; ?>
                     </div>
                     <div class="form-actions">
                         <a href="forgetpass.php" class="password-reset-link">Forgot Password?</a>
@@ -69,4 +87,8 @@
     </div>
     <script src="../assets/js/login.js"></script>
 </body>
-</html> 
+</html>
+<?php
+// Clear any remaining session data
+unset($_SESSION['old_input']);
+?> 

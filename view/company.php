@@ -24,12 +24,12 @@
                 <h1>Employify</h1>
             </div>
             <ul class="nav-links">
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./jobs.html">Find a Job</a></li>
-                <li><a href="./about.html">About</a></li>
-                <li><a href="./career-resources.html">Career Resources</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-                <li><a href="./cv-maker.html">CV Maker</a></li>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="jobs.php">Find a Job</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="career-resources.php">Career Resources</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                <li><a href="cv-maker.php">CV Maker</a></li>
             </ul>
             <div class="user-actions">
                 <a href="./login.html" class="login-btn">Login</a>
@@ -102,12 +102,12 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./jobs.html">Find a Job</a></li>
-                    <li><a href="./about.html">About</a></li>
-                    <li><a href="./career-resources.html">Career Resources</a></li>
-                    <li><a href="./contact.html">Contact</a></li>
-                    <li><a href="./cv-maker.html">CV Maker</a></li>
+                    <li><a href="home.php">Home</a></li>
+                    <li><a href="jobs.php">Find a Job</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="career-resources.php">Career Resources</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="cv-maker.php">CV Maker</a></li>
                 </ul>
             </div>
 
