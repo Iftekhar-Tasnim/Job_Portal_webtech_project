@@ -1,10 +1,6 @@
 <?php
     session_start();
-    if(isset($_COOKIE['status'])){
-
-    }else{
-        header(header: 'location: 1_login.php');
-    }
+    if(isset($_SESSION['status'])){
 ?>
 
 <!DOCTYPE html>
@@ -13,95 +9,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salary Range Estimator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .tab {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .tab button {
-            padding: 10px 20px;
-            margin: 0 5px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .tab button:hover {
-            background-color: #0056b3;
-        }
-        .tab button.active {
-            background-color: #003087;
-        }
-        .section {
-            display: none;
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .section.active {
-            display: block;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .comparison-table th, .comparison-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        .comparison-table th {
-            background-color: #007bff;
-            color: white;
-        }
-        .benefits-list {
-            list-style: none;
-            padding: 0;
-        }
-        .benefits-list li {
-            padding: 10px;
-            background-color: #f9f9f9;
-            margin-bottom: 5px;
-            border-radius: 4px;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e7f3fe;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/salary.css">
+       
 </head>
 <body>
     <div class="container">
@@ -112,7 +21,7 @@
             <button class="tablink" onclick="openSection('benefits')">Benefits Breakdown</button>
         </div>
 
-        <!-- Compensation Estimator -->
+       
         <div id="estimator" class="section active">
             <h2>Compensation Estimator</h2>
             <div class="form-group">
@@ -135,7 +44,7 @@
             <div id="estimator-result" class="result"></div>
         </div>
 
-        <!-- Role Comparison Tool -->
+        
         <div id="comparison" class="section">
             <h2>Role Comparison Tool</h2>
             <div class="form-group">
@@ -185,7 +94,7 @@
             </table>
         </div>
 
-        <!-- Benefits Breakdown -->
+        
         <div id="benefits" class="section">
             <h2>Benefits Breakdown</h2>
             <div class="form-group">
@@ -202,7 +111,7 @@
     </div>
 
     <script>
-        // Mock salary data
+        
         const salaryData = {
             'software-engineer': {
                 'new-york': { base: 120000, bonus: 15000 },
@@ -221,7 +130,7 @@
             }
         };
 
-        // Mock benefits data
+        
         const benefitsData = {
             'software-engineer': [
                 'Health Insurance: Comprehensive coverage',
@@ -316,3 +225,10 @@
     </script>
 </body>
 </html>
+
+<?php
+    }else{
+        header('location: login.php');
+    }
+
+?>
