@@ -1,8 +1,4 @@
-<?php
-    session_start();
-    if(isset($_SESSION['status'])){
-?>
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,10 +26,23 @@
                 <li><a href="cv-maker.php">CV Maker</a></li>
             </ul>
             <div class="user-actions">
-    <a href="login.php" class="login-btn">Login</a>
-    <a href="Registration.php" class="register-btn">Register</a>
-</div>
-
+                <?php if(isset($_SESSION['status']) && $_SESSION['status'] === true): ?>
+                    <div class="profile-section">
+                        <a href="Profile.php" class="profile-link">
+                            <div class="profile-picture">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span class="user-name"><?php echo isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : 'Profile'; ?></span>
+                        </a>
+                        <a href="logout.php" class="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                <?php else: ?>
+                    <a href="login.php" class="login-btn">Login</a>
+                    <a href="registration.php" class="register-btn">Register</a>
+                <?php endif; ?>
+            </div>
         </nav>
     </header>
 
@@ -141,11 +150,4 @@
     <script src="../assets/js/about.js"></script>
 </body>
 </html>
-
-<?php
-    }else{
-        header('location: login.php');
-    }
-
-?>
 

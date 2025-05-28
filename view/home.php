@@ -1,39 +1,20 @@
-<?php
-    session_start();
-    if(isset($_SESSION['status'])){
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Portal - Find Your Dream Job</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
-    <link rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" href="../assets/css/home.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
     <header>
-    <nav>
-            <div class="logo">
-                <h1>Employify</h1>
-            </div>
-            <ul class="nav-links">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="jobs.php">Find a Job</a></li>
-                <li><a href="about.php" class="active">About</a></li>
-                <li><a href="career-resources.php">Career Resources</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="cv-maker.php">CV Maker</a></li>
-            </ul>
-            <div class="user-actions">
-    <a href="login.php" class="login-btn">Login</a>
-    <a href="Registration.php" class="register-btn">Register</a>
-</div>
-
-        </nav>
+        <?php include 'navbar.php'; ?>
     </header>
 
     <!-- Hero Section -->
@@ -41,12 +22,7 @@
         <div class="hero-content">
             <h1>Find Your Dream Job</h1>
             <p>Connect with top employers and start your career journey today</p>
-            <?php if (!isset($_SESSION['user_id'])): ?>
-                <div class="hero-buttons">
-                    <a href="../../register.php" class="btn btn-primary">Get Started</a>
-                    <a href="../../jobs.php" class="btn btn-secondary">Browse Jobs</a>
-                </div>
-            <?php endif; ?>
+            
         </div>
     </div>
 
@@ -81,17 +57,17 @@
     <div class="job-categories">
         <h2>Popular Job Categories</h2>
         <div class="categories-grid">
-            <a href="../../jobs.php?category=it" class="category-card">
+            <a href="" class="category-card">
                 <i class="fas fa-laptop-code"></i>
                 <h3>Information Technology</h3>
                 <p>100+ Jobs</p>
             </a>
-            <a href="../../jobs.php?category=marketing" class="category-card">
+            <a href="" class="category-card">
                 <i class="fas fa-bullhorn"></i>
                 <h3>Marketing</h3>
                 <p>75+ Jobs</p>
             </a>
-            <a href="../../jobs.php?category=finance" class="category-card">
+            <a href="" class="category-card">
                 <i class="fas fa-chart-line"></i>
                 <h3>Finance</h3>
                 <p>50+ Jobs</p>
@@ -109,11 +85,9 @@
         <div class="cta-content">
             <h2>Ready to Start Your Career Journey?</h2>
             <p>Join thousands of job seekers who found their dream jobs through Employify</p>
-            <?php if (!isset($_SESSION['user_id'])): ?>
-                <a href="../../register.php" class="btn btn-primary">Create Account</a>
-            <?php else: ?>
+            
                 <a href="../../jobs.php" class="btn btn-primary">Find Jobs</a>
-            <?php endif; ?>
+            
         </div>
     </div>
 
@@ -154,14 +128,7 @@
         </div>
     </footer>
 
-    <script src="../assets/js/auth.js"></script>
-    <script src="../assets/js/main.js"></script>
+    
+    
 </body>
 </html>
-
-<?php
-    }else{
-        header('location: login.php');
-    }
-
-?>

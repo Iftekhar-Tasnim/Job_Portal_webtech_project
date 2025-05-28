@@ -4,95 +4,14 @@
     padding: 20px;
 }
 
-/* Navbar Styles */
-.navbar {
-    background: #fff;
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
+
 
 .logo h1 {
     color: #007bff;
     font-size: 1.5rem;
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-}
 
-.nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: #007bff;
-}
-
-.user-actions {
-    display: flex;
-    gap: 1rem;
-}
-
-.login-btn,
-.register-btn {
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.login-btn {
-    background: #007bff;
-}
-
-.register-btn {
-    background: #28a745;
-}
-
-.login-btn:hover {
-    background: #0056b3;
-}
-
-.register-btn:hover {
-    background: #218838;
-}
-
-/* Responsive Navbar */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 1rem;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
-    .user-actions {
-        gap: 0.5rem;
-    }
-
-    .login-btn,
-    .register-btn {
-        padding: 0.5rem;
-    }
-}
 
 .job-header {
     text-align: center;

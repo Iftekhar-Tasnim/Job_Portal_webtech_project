@@ -1,14 +1,11 @@
-<?php
-    session_start();
-    if(isset($_SESSION['status'])){
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Jobs - Job Portal</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/jobs.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -16,25 +13,7 @@
 <body>
     <!-- Header -->
     <header>
-    <nav>
-            <div class="logo">
-                <h1>Employify</h1>
-            </div>
-            <ul class="nav-links">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="jobs.php">Find a Job</a></li>
-                <li><a href="about.php" class="active">About</a></li>
-                <li><a href="career-resources.php">Career Resources</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="cv-maker.php">CV Maker</a></li>
-            </ul>
-            <div class="user-actions">
-    <a href="login.php" class="login-btn">Login</a>
-    <a href="Registration.php" class="register-btn">Register</a>
-</div>
-
-        </nav>
-    </header>
+        <?php include 'navbar.php'; ?>
 
     <!-- Main Content -->
     <div class="job-container">
@@ -152,14 +131,7 @@
         </div>
     </footer>
 
-    <script src="../assets/js/auth.js"></script>
+    
     <script src="../assets/js/jobs.js"></script>
 </body>
-</html> 
-
-<?php
-    }else{
-        header('location: login.php');
-    }
-
-?>
+</html>

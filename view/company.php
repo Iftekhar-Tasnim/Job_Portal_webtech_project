@@ -1,11 +1,6 @@
 <?php
     session_start();
-    if(isset($_COOKIE['status'])) {
-?>
-<?php
-    } else {
-        header('location: login.html');
-    }
+    if(isset($_SESSION['status'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,8 +27,8 @@
                 <li><a href="cv-maker.php">CV Maker</a></li>
             </ul>
             <div class="user-actions">
-                <a href="./login.html" class="login-btn">Login</a>
-                <a href="./Registration.html" class="register-btn">Register</a>
+                <a href="./login.php" class="login-btn">Login</a>
+                <a href="./registration.php" class="register-btn">Register</a>
             </div>
         </nav>
     </header>
@@ -131,3 +126,8 @@
     <script src="company.js"></script>
 </body>
 </html>
+<?php
+    } else {
+        header('location: login.php');
+    }
+?>

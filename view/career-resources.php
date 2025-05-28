@@ -1,8 +1,4 @@
-<?php
-    session_start();
-    if(isset($_SESSION['status'])){
-?>
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,24 +13,7 @@
 <body>
     <!-- Header -->
     <header>
-    <nav>
-            <div class="logo">
-                <h1>Employify</h1>
-            </div>
-            <ul class="nav-links">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="jobs.php">Find a Job</a></li>
-                <li><a href="about.php" class="active">About</a></li>
-                <li><a href="career-resources.php">Career Resources</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="cv-maker.php">CV Maker</a></li>
-            </ul>
-            <div class="user-actions">
-    <a href="login.php" class="login-btn">Login</a>
-    <a href="Registration.php" class="register-btn">Register</a>
-</div>
-
-        </nav>
+        <?php include 'navbar.php'; ?>
     </header>
 
     <main class="main-content">
@@ -140,15 +119,8 @@
     </div>
  </footer>
 
-    <script src="../assets/js/auth.js"></script>
+    
     <script src="../assets/js/jobs.js"></script>
     <script src="../assets/js/blog-posts.js"></script>
 </body>
 </html>
-
-<?php
-    }else{
-        header('location: login.php');
-    }
-
-?>
