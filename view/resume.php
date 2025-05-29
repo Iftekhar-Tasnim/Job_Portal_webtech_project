@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+    session_start();
+    if(isset($_SESSION['status'])){
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +67,12 @@
         </p>
     </footer>
 
-    <script src="resume.js"></script>
+    <script src="../assets/js/resume.js"></script>
 </body>
 </html>
+<?php
+    }else{
+        header('location: login.php');
+    }
+
+?>

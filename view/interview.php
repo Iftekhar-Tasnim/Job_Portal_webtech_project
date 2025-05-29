@@ -1,7 +1,4 @@
-<?php
-    session_start();
-    if(isset($_SESSION['status'])){
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,12 +43,6 @@
         </section>
     </main>
 
-    <script src="interview.js"></script>
+    <script src="../assets/js/alert.js"></script>
 </body>
 </html>
-<?php
-    }else{
-        header('location: login.php');
-    }
-
-?>

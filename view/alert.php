@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,6 +96,6 @@
         </div>
     </footer>
 
-    <script src="alert.js"></script>
+    <script src="../assets/js/alert.js"></script>
 </body>
 </html>

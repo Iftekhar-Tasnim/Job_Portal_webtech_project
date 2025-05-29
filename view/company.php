@@ -1,7 +1,4 @@
-<?php
-    session_start();
-    if(isset($_SESSION['status'])) {
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,11 +120,6 @@
         </div>
     </footer>
 
-    <script src="company.js"></script>
+    <script src="../assets/js/company.js"></script>
 </body>
 </html>
-<?php
-    } else {
-        header('location: login.php');
-    }
-?>
