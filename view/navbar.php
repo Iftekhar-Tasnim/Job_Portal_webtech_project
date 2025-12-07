@@ -1,32 +1,184 @@
 <?php if (session_status() === PHP_SESSION_NONE) session_start(); ?>
-<nav>
-    <div class="logo">
-        <h1>Employify</h1>
-    </div>
-    <ul class="nav-links">
-        <li><a href="home.php">Home</a></li>
-        <li><a href="jobs.php">Find a Job</a></li>
-        <li><a href="about.php">About</a></li>
-        <li><a href="career-resources.php">Career Resources</a></li>
-        <li><a href="contact.php">Contact</a></li>
-        <li><a href="resume.php">CV Maker</a></li>
-    </ul>
-    <div class="user-actions">
-        <?php if(isset($_SESSION['status']) && $_SESSION['status'] === true): ?>
-            <div class="profile-section">
-                <a href="Profile.php" class="profile-link">
-                    <div class="profile-picture">
-                        <i class="fa-solid fa-user"></i>
+<nav class="navbar">
+    <div class="nav-container">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="home.php" class="logo-link">
+                <div class="logo-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <span class="logo-text">Employify</span>
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links" id="navLinks">
+            <li><a href="home.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'home.php') ? 'active' : ''; ?>">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a></li>
+            <li><a href="jobs.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'jobs.php') ? 'active' : ''; ?>">
+                <i class="fas fa-search"></i>
+                <span>Find a Job</span>
+            </a></li>
+            <li><a href="career-resources.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'career-resources.php') ? 'active' : ''; ?>">
+                <i class="fas fa-book"></i>
+                <span>Resources</span>
+            </a></li>
+            <li><a href="about.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'about.php') ? 'active' : ''; ?>">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a></li>
+            <li><a href="contact.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'contact.php') ? 'active' : ''; ?>">
+                <i class="fas fa-envelope"></i>
+                <span>Contact</span>
+            </a></li>
+        </ul>
+
+        <!-- User Actions -->
+        <div class="user-actions">
+            <?php if(isset($_SESSION['status']) && $_SESSION['status'] === true): ?>
+                <!-- Logged In User -->
+                <div class="user-menu">
+                    <a href="resume.php" class="nav-icon-btn" title="CV Maker">
+                        <i class="fas fa-file-alt"></i>
+                    </a>
+                    <a href="alert.php" class="nav-icon-btn" title="Job Alerts">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                    <div class="profile-dropdown">
+                        <button class="profile-trigger" id="profileTrigger" type="button">
+                            <div class="profile-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="profile-name"><?php echo isset($_SESSION['name']) ? htmlspecialchars(substr($_SESSION['name'], 0, 15)) : 'Profile'; ?></span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </button>
+                        <div class="dropdown-menu" id="profileDropdown">
+                            <div class="dropdown-header">
+                                <div class="dropdown-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="dropdown-info">
+                                    <div class="dropdown-name"><?php echo isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : 'User'; ?></div>
+                                    <div class="dropdown-email"><?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?></div>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="Profile.php" class="dropdown-item">
+                                <i class="fas fa-user-circle"></i>
+                                <span>My Profile</span>
+                            </a>
+                            <a href="Profile.php#applications" class="dropdown-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>My Applications</span>
+                            </a>
+                            <a href="Profile.php#saved" class="dropdown-item">
+                                <i class="fas fa-bookmark"></i>
+                                <span>Saved Jobs</span>
+                            </a>
+                            <a href="resume.php" class="dropdown-item">
+                                <i class="fas fa-file-alt"></i>
+                                <span>My Resume</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="logout.php" class="dropdown-item logout-item">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
                     </div>
-                    <span class="user-name"><?php echo isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : 'Profile'; ?></span>
-                </a>
-                <a href="logout.php" class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            </div>
-        <?php else: ?>
-            <a href="login.php" class="login-btn">Login</a>
-            <a href="registration.php" class="register-btn">Register</a>
-        <?php endif; ?>
+                </div>
+            <?php else: ?>
+                <!-- Guest User -->
+                <div class="guest-actions">
+                    <a href="login.php" class="btn-nav btn-login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </a>
+                    <a href="registration.php" class="btn-nav btn-register">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Register</span>
+                    </a>
+                </div>
+            <?php endif; ?>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </div>
-</nav> 
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <?php if(isset($_SESSION['status']) && $_SESSION['status'] === true): ?>
+                <div class="mobile-profile">
+                    <div class="mobile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="mobile-user-info">
+                        <div class="mobile-user-name"><?php echo isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : 'User'; ?></div>
+                        <div class="mobile-user-email"><?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?></div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <div class="mobile-guest">
+                    <h3>Welcome to Employify</h3>
+                    <p>Sign in to access all features</p>
+                </div>
+            <?php endif; ?>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="home.php" class="mobile-nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a></li>
+            <li><a href="jobs.php" class="mobile-nav-link">
+                <i class="fas fa-search"></i>
+                <span>Find a Job</span>
+            </a></li>
+            <li><a href="career-resources.php" class="mobile-nav-link">
+                <i class="fas fa-book"></i>
+                <span>Career Resources</span>
+            </a></li>
+            <li><a href="resume.php" class="mobile-nav-link">
+                <i class="fas fa-file-alt"></i>
+                <span>CV Maker</span>
+            </a></li>
+            <li><a href="about.php" class="mobile-nav-link">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a></li>
+            <li><a href="contact.php" class="mobile-nav-link">
+                <i class="fas fa-envelope"></i>
+                <span>Contact</span>
+            </a></li>
+        </ul>
+        <div class="mobile-menu-footer">
+            <?php if(isset($_SESSION['status']) && $_SESSION['status'] === true): ?>
+                <a href="Profile.php" class="mobile-btn">
+                    <i class="fas fa-user-circle"></i>
+                    <span>My Profile</span>
+                </a>
+                <a href="logout.php" class="mobile-btn mobile-btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            <?php else: ?>
+                <a href="login.php" class="mobile-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </a>
+                <a href="registration.php" class="mobile-btn mobile-btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Register</span>
+                </a>
+            <?php endif; ?>
+        </div>
+    </div>
+</nav>

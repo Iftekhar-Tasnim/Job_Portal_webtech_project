@@ -2,17 +2,22 @@
     session_start();
     if(isset($_SESSION['status'])){
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salary Range Estimator</title>
+    <title>Salary Range Estimator - Employify</title>
+    <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/salary.css">
-       
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navbar -->
+    <?php include 'navbar.php'; ?>
     <div class="container">
         <h1>Salary Range Estimator</h1>
         <div class="tab">
@@ -223,6 +228,7 @@
             });
         }
     </script>
+    <script src="../assets/js/navbar.js"></script>
 </body>
 </html>
 

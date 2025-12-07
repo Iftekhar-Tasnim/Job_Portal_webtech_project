@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Profile - Job Portal</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <title>Company Profile - Employify</title>
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/company-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <?php include 'navbar.php'; ?>
-    </header>
+    <!-- Navbar -->
+    <?php include 'navbar.php'; ?>
 
     <!-- Main Content -->
     <main class="company-profile">
@@ -190,6 +190,7 @@
     </footer>
 
     <
-    <script src="../assets/js/company-profile.js"></>
+    <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/company-profile.js"></script>
 </body>
 </html>

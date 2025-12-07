@@ -1,16 +1,21 @@
-<?php
-session_start();
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Job Portal Login</title>
+    <title>Login - Employify</title>
+    <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navbar -->
+    <?php include 'navbar.php'; ?>
+    
     <div class="main-container">
         <div class="welcome-section">
             <h2>Welcome to Job Portal</h2>
@@ -85,7 +90,22 @@ session_start();
             <p>New to Job Portal? <a href="registration.php">Create an account</a></p>
         </div>
     </div>
+    <script src="../assets/js/navbar.js"></script>
     <script src="../assets/js/login.js"></script>
+    <script>
+        // Debug: Log form submissions
+        document.addEventListener('DOMContentLoaded', function() {
+            const employerForm = document.getElementById('employerLoginForm');
+            if (employerForm) {
+                employerForm.addEventListener('submit', function(e) {
+                    console.log('Employer form submitting...');
+                    console.log('Email:', this.querySelector('[name=email]').value);
+                    console.log('User Type:', this.querySelector('[name=user_type]').value);
+                    // Let it submit normally - don't prevent
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 <?php

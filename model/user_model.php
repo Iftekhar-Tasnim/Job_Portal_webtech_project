@@ -2,27 +2,71 @@
 require_once 'db.php';
 
 function login($user) {
+    // Ensure session is started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
     $con = getConnection();
-    $email = $user['email'];
-    $password = $user['password'];
-    $user_type = $user['user_type'];
+    $email = trim($user['email']);
+    $password = trim($user['password']);
+    $user_type = trim($user['user_type']);
 
     // First check in the appropriate registration table
     if ($user_type === 'applicant') {
         $sql = "SELECT * FROM applicantreg WHERE Email = ?";
-    } else {
+    } else if ($user_type === 'employer') {
         $sql = "SELECT * FROM employerreg WHERE Email = ?";
+    } else {
+        mysqli_close($con);
+        return false;
     }
 
     // Prepare and execute the statement
     $stmt = mysqli_prepare($con, $sql);
+    if (!$stmt) {
+        mysqli_close($con);
+        return false;
+    }
+    
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
+        // Get password from database - handle case sensitivity
+        $dbPassword = isset($row['Password']) ? $row['Password'] : (isset($row['password']) ? $row['password'] : '');
+        
+        // Debug: Log what we're comparing (remove in production)
+        error_log("Login attempt - Email: $email, User Type: $user_type, DB Password length: " . strlen($dbPassword) . ", Input password: $password");
+        
         // Check if password is hashed or plain text
-        if (password_verify($password, $row['Password']) || $password === $row['Password']) {
+        // Try password_verify first (for hashed passwords)
+        $passwordMatch = false;
+        
+        // First try: password_verify (for hashed passwords)
+        if (strlen($dbPassword) > 20) {
+            if (password_verify($password, $dbPassword)) {
+                $passwordMatch = true;
+            }
+        }
+        
+        // Second try: direct comparison (for plain text passwords)
+        if (!$passwordMatch && $password === $dbPassword) {
+            $passwordMatch = true;
+        }
+        
+        // Third try: trimmed comparison
+        if (!$passwordMatch && trim($password) === trim($dbPassword)) {
+            $passwordMatch = true;
+        }
+        
+        // Fourth try: case-insensitive comparison
+        if (!$passwordMatch && strtolower(trim($password)) === strtolower(trim($dbPassword))) {
+            $passwordMatch = true;
+        }
+        
+        if ($passwordMatch) {
             // Store user data in session
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['email'] = $row['Email'];
@@ -31,7 +75,7 @@ function login($user) {
             if ($user_type === 'applicant') {
                 $_SESSION['name'] = $row['First_Name'] . ' ' . $row['Last_Name'];
             } else {
-                $_SESSION['name'] = $row['Company_Name'];
+                $_SESSION['name'] = isset($row['Company_Name']) ? $row['Company_Name'] : 'Employer';
             }
             
             mysqli_stmt_close($stmt);
