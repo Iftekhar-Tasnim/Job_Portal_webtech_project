@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Page - SQT Assignment</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Times New Roman', serif;
+            width: 210mm;
+            height: 297mm;
+            max-width: 210mm;
+            max-height: 297mm;
+            margin: 0 auto;
+            padding: 30mm 25mm;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20mm;
+        }
+        
+        .logo {
+            max-width: 60mm;
+            max-height: 60mm;
+            width: auto;
+            height: auto;
+            margin: 0 auto 8mm auto;
+            display: block;
+        }
+        
+        .university-name {
+            font-size: 22pt;
+            font-weight: bold;
+            margin-bottom: 5mm;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .assignment-title {
+            font-size: 26pt;
+            font-weight: bold;
+            margin: 25mm 0 15mm 0;
+            text-align: center;
+            color: #1a1a1a;
+            text-decoration: underline;
+        }
+        
+        .course-code {
+            font-size: 16pt;
+            margin-bottom: 8mm;
+            color: #333;
+            text-align: center;
+        }
+        
+        .faculty-info {
+            text-align: center;
+            margin: 15mm 0 10mm 0;
+            font-size: 14pt;
+        }
+        
+        .faculty-label {
+            color: #555;
+            margin-bottom: 3mm;
+        }
+        
+        .faculty-name {
+            font-weight: bold;
+            color: #1a1a1a;
+            font-size: 16pt;
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .group-info {
+            margin: 15mm 0;
+        }
+        
+        .group-title {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 12mm;
+            text-align: center;
+            color: #1a1a1a;
+        }
+        
+        .members-list {
+            margin: 0 auto;
+            width: 80%;
+        }
+        
+        .member {
+            margin-bottom: 6mm;
+            font-size: 13pt;
+            display: flex;
+            justify-content: space-between;
+            padding: 2mm 0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .member-name {
+            font-weight: bold;
+        }
+        
+        .member-id {
+            color: #555;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 15mm;
+            font-size: 12pt;
+            color: #666;
+        }
+        
+        .date {
+            margin-top: 10mm;
+            text-align: center;
+            font-size: 13pt;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 30mm 25mm;
+                width: 210mm;
+                height: 297mm;
+                max-width: 210mm;
+                max-height: 297mm;
+            }
+            
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+        
+        @media screen {
+            body {
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="aiub.png" alt="AIUB Logo" class="logo">
+        <div class="university-name">American International University</div>
+    </div>
+    
+    <div class="content">
+        <div class="assignment-title">Software Quality Testing</div>
+        <div class="course-code">SQT</div>
+        
+        <div class="faculty-info">
+            <div class="faculty-label">Faculty Name:</div>
+            <div class="faculty-name">ABHIJIT BHOWMIK</div>
+        </div>
+        
+        <div class="group-info">
+            <div class="group-title">Group Members</div>
+            <div class="members-list">
+                <div class="member">
+                    <span class="member-name">Member 1 Name</span>
+                    <span class="member-id">ID: _______________</span>
+                </div>
+                <div class="member">
+                    <span class="member-name">Member 2 Name</span>
+                    <span class="member-id">ID: _______________</span>
+                </div>
+                <div class="member">
+                    <span class="member-name">Member 3 Name</span>
+                    <span class="member-id">ID: _______________</span>
+                </div>
+                <div class="member">
+                    <span class="member-name">Member 4 Name</span>
+                    <span class="member-id">ID: _______________</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="date">Date: _______________</div>
+    </div>
+</body>
+</html>
