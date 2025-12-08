@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+require_once '../model/job_model.php';
+
+// Get job count for stats
+$totalJobs = getJobCount();
+$locations = getJobLocations();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +14,14 @@
     <title>Find Jobs - Employify</title>
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/jobs.css">
+    <link rel="stylesheet" href="../assets/css/notification.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-logged-in="<?php echo (isset($_SESSION['status']) && $_SESSION['status'] === true) ? 'true' : 'false'; ?>" 
+      data-user-type="<?php echo isset($_SESSION['user_type']) ? htmlspecialchars($_SESSION['user_type']) : ''; ?>">
     <!-- Navbar -->
     <?php include 'navbar.php'; ?>
 
@@ -46,16 +55,16 @@
             <!-- Quick Stats -->
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number">10,000+</div>
+                    <div class="stat-number"><?php echo number_format($totalJobs); ?>+</div>
                     <div class="stat-label">Active Jobs</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">5,000+</div>
-                    <div class="stat-label">Companies</div>
+                    <div class="stat-number"><?php echo count($locations); ?>+</div>
+                    <div class="stat-label">Locations</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">50,000+</div>
-                    <div class="stat-label">Job Seekers</div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Available</div>
                 </div>
             </div>
         </div>
@@ -78,11 +87,9 @@
                     <label><i class="fas fa-map-marker-alt"></i> Location</label>
                     <select id="locationFilter">
                         <option value="">All Locations</option>
-                        <option value="dhaka">Dhaka</option>
-                        <option value="chittagong">Chittagong</option>
-                        <option value="sylhet">Sylhet</option>
-                        <option value="rajshahi">Rajshahi</option>
-                        <option value="khulna">Khulna</option>
+                        <?php foreach ($locations as $loc): ?>
+                            <option value="<?php echo htmlspecialchars(strtolower($loc)); ?>"><?php echo htmlspecialchars($loc); ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 
@@ -178,43 +185,14 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Employify</h3>
-                <p>Find your dream job with Employify. Connect with top employers and start your career journey today.</p>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="home.php">Home</a></li>
-                    <li><a href="jobs.php">Find a Job</a></li>
-                    <li><a href="about.php">About</a></li>
-                    <li><a href="career-resources.php">Career Resources</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                    <li><a href="resume.php">CV Maker</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>Email: info@employify.com</p>
-                <p>Phone: +8801711111111</p>
-                <div class="social-links">
-                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; <?php echo date('Y'); ?> Employify. All rights reserved.</p>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
 
     <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/notification.js"></script>
+    <script>
+        // Pass API endpoint to JavaScript
+        const JOBS_API_URL = '../controller/jobs_controller.php';
+    </script>
     <script src="../assets/js/jobs.js"></script>
 </body>
 </html>

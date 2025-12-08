@@ -9,6 +9,7 @@
     
     <link rel="stylesheet" href="../assets/css/nav-footer.css">
     <link rel="stylesheet" href="../assets/css/home.css">
+    <link rel="stylesheet" href="../assets/css/notification.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -95,7 +96,7 @@
                     <h3>Build Resume</h3>
                     <p>Create a professional CV</p>
                 </a>
-                <a href="alert.php" class="action-card">
+                <a href="jobs.php" class="action-card" onclick="showInfo('Job alerts feature coming soon!'); return false;">
                     <div class="action-icon">
                         <i class="fas fa-bell"></i>
                     </div>
@@ -131,7 +132,7 @@
                     </div>
                     <h3>Job Alerts</h3>
                     <p>Never miss an opportunity! Set up personalized job alerts and get notified when new positions match your criteria.</p>
-                    <a href="alert.php" class="feature-link">Set Up Alerts <i class="fas fa-arrow-right"></i></a>
+                    <a href="jobs.php" class="feature-link" onclick="showInfo('Job alerts feature coming soon!'); return false;">Set Up Alerts <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="feature-card">
@@ -149,7 +150,7 @@
                     </div>
                     <h3>Job Alerts</h3>
                     <p>Never miss an opportunity. Get instant notifications about new jobs that match your preferences and criteria.</p>
-                    <a href="alert.php" class="feature-link">Set Alerts <i class="fas fa-arrow-right"></i></a>
+                    <a href="jobs.php" class="feature-link" onclick="showInfo('Job alerts feature coming soon!'); return false;">Set Alerts <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="feature-card">
@@ -363,6 +364,7 @@
     </footer>
 
     <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/notification.js"></script>
     <script src="../assets/js/index.js"></script>
 </body>
 </html>

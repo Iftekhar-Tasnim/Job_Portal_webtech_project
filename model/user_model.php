@@ -101,23 +101,95 @@ function register($user) {
     $gender = $user['Gender'];
     
 
-    // Check if username or email already exists
-    $checkSql = "SELECT * FROM applicantreg WHERE Email = '$email' OR Phone = '$phone'";
-    $checkResult = mysqli_query($con, $checkSql);
-
-    if (mysqli_num_rows($checkResult) > 0) {
-        mysqli_close($con);
-        return "exists"; // Username/email already exists
+    // Check if email or phone already exists
+    $checkSql = "SELECT * FROM applicantreg WHERE Email = ? OR Phone = ?";
+    $stmt = mysqli_prepare($con, $checkSql);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "ss", $email, $phone);
+        mysqli_stmt_execute($stmt);
+        $checkResult = mysqli_stmt_get_result($stmt);
+        
+        if (mysqli_num_rows($checkResult) > 0) {
+            mysqli_stmt_close($stmt);
+            mysqli_close($con);
+            return "exists"; // Email/phone already exists
+        }
+        mysqli_stmt_close($stmt);
     }
 
-    $sql1 = "INSERT INTO applicantreg (First_Name, Last_Name, Email, Password, Phone, Address, Gender)
-             VALUES ('$fname', '$lname', '$email', '$pass', '$phone', '$address', '$gender')";
-
-    $success1 = mysqli_query($con, $sql1);
+    // Use prepared statement for insert
+    $sql = "INSERT INTO applicantreg (First_Name, Last_Name, Email, Password, Phone, Address, Gender)
+             VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $sql);
+    
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "sssssss", $fname, $lname, $email, $pass, $phone, $address, $gender);
+        $success = mysqli_stmt_execute($stmt);
+        
+        if (!$success) {
+            error_log("Applicant registration failed: " . mysqli_stmt_error($stmt));
+        }
+        
+        mysqli_stmt_close($stmt);
+    } else {
+        error_log("Failed to prepare statement for applicant registration: " . mysqli_error($con));
+        $success = false;
+    }
     
     mysqli_close($con);
 
-    return ($success1) ? "success" : "fail";
+    return ($success) ? "success" : "fail";
+}
+
+function registerEmployer($user) {
+    $con = getConnection();
+
+    $companyName = isset($user['Company_Name']) ? trim($user['Company_Name']) : '';
+    $email = isset($user['Email']) ? trim($user['Email']) : '';
+    $pass = isset($user['Password']) ? trim($user['Password']) : '';
+    $phone = isset($user['Company_Phone']) ? trim($user['Company_Phone']) : '';
+    $address = isset($user['Company_Address']) ? trim($user['Company_Address']) : '';
+    $industry = isset($user['Industry']) ? trim($user['Industry']) : '';
+    $website = isset($user['Company_Website']) ? trim($user['Company_Website']) : '';
+
+    // Check if email already exists
+    $checkSql = "SELECT * FROM employerreg WHERE Email = ?";
+    $stmt = mysqli_prepare($con, $checkSql);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $checkResult = mysqli_stmt_get_result($stmt);
+        
+        if (mysqli_num_rows($checkResult) > 0) {
+            mysqli_stmt_close($stmt);
+            mysqli_close($con);
+            return "exists"; // Email already exists
+        }
+        mysqli_stmt_close($stmt);
+    }
+
+    // Use prepared statement for insert
+    $sql = "INSERT INTO employerreg (Company_Name, Email, Password, Company_Phone, Company_Address, Industry, Company_Website)
+             VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $sql);
+    
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "sssssss", $companyName, $email, $pass, $phone, $address, $industry, $website);
+        $success = mysqli_stmt_execute($stmt);
+        
+        if (!$success) {
+            error_log("Employer registration failed: " . mysqli_stmt_error($stmt));
+        }
+        
+        mysqli_stmt_close($stmt);
+    } else {
+        error_log("Failed to prepare statement for employer registration: " . mysqli_error($con));
+        $success = false;
+    }
+    
+    mysqli_close($con);
+
+    return ($success) ? "success" : "fail";
 }
 
 function addUser($user) {

@@ -1,134 +1,754 @@
-* {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-        body {
-            background-color: #f0f0f0;
-        }
-        header {
-            background-color: #1e40af;
-            color: white;
-            padding: 1rem;
-        }
-        header nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        header a {
-            color: white;
-            text-decoration: none;
-            margin-left: 1rem;
-        }
-        header a:hover {
-            text-decoration: underline;
-        }
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        section {
-            background-color: white;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        h2, h3 {
-            margin-bottom: 1rem;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        label {
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        textarea {
-            resize: vertical;
-        }
-        button {
-            background-color: #1e40af;
-            color: white;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #1e3a8a;
-        }
-        progress#progressBar {
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            height: 1rem;
-        }
-        progress#progressBar::-webkit-progress-bar {
-            background-color: #e0e0e0;
-            border-radius: 4px;
-        }
-        progress#progressBar::-webkit-progress-value {
-            background-color: #1e40af;
-            border-radius: 4px;
-        }
-        progress#progressBar::-moz-progress-bar {
-            background-color: #1e40af;
-            border-radius: 4px;
-        }
-        p#dropZone {
-            border: 2px dashed #ccc;
-            padding: 2rem;
-            text-align: center;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        p#dropZone:hover, p#dropZone.active {
-            border-color: #1e40af;
-        }
-        input#resumeFile {
-            display: none;
-        }
-        footer {
-            background-color: #1e40af;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-        }
-        footer a {
-            color: white;
-            text-decoration: none;
-            margin: 0 0.5rem;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-        .error {
-            color: red;
-            font-size: 0.9rem;
-            margin-top: 0.2rem;
-        }
-        @media (min-width: 768px) {
-            main {
-                display: grid;
-                grid-template-columns: 1fr 2fr;
-                gap: 1.5rem;
-            }
-            section#uploaderSection {
-                grid-column: 1 / 3;
-            }
-        }
+/* ============================================
+   RESUME/CV BUILDER PAGE - MODERN DESIGN
+   ============================================ */
+
+/* CSS Variables */
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1e40af;
+    --primary-light: #3b82f6;
+    --secondary-color: #10b981;
+    --accent-color: #f59e0b;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --text-light: #9ca3af;
+    --bg-white: #ffffff;
+    --bg-light: #f9fafb;
+    --bg-gray: #f3f4f6;
+    --border-color: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Base Styles */
+body {
+    font-family: var(--font-family) !important;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-light);
+    padding-top: 0;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* ============================================
+   MAIN SECTION
+   ============================================ */
+
+.resume-main {
+    padding: 40px 0 40px;
+    background: var(--bg-light);
+    min-height: calc(100vh - 80px);
+}
+
+.resume-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ============================================
+   HEADER SECTION
+   ============================================ */
+
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-content h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    font-family: var(--font-family) !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-content h1 i {
+    color: var(--primary-color);
+}
+
+.header-content p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin: 0;
+    font-family: var(--font-family) !important;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* ============================================
+   PROGRESS SECTION
+   ============================================ */
+
+.progress-section {
+    background: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.progress-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-family) !important;
+}
+
+.progress-percentage {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 0.9375rem;
+    font-family: var(--font-family) !important;
+}
+
+.progress-bar-wrapper {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-gray);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: 6px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+/* ============================================
+   CONTENT LAYOUT
+   ============================================ */
+
+.resume-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.form-section {
+    order: 1;
+}
+
+.preview-section {
+    order: 2;
+    display: none;
+    position: sticky;
+    top: 90px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.preview-section.active {
+    display: block;
+}
+
+@media (min-width: 1200px) {
+    .resume-content {
+        grid-template-columns: 1fr 350px;
+    }
+    
+    .preview-section {
+        display: block;
+        order: 2;
+    }
+}
+
+/* ============================================
+   FORM SECTION CARDS
+   ============================================ */
+
+.form-section-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+}
+
+.card-header h2 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-family) !important;
+}
+
+.card-header i {
+    font-size: 1.125rem;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* ============================================
+   FORM ELEMENTS
+   ============================================ */
+
+.resume-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+    font-family: var(--font-family) !important;
+}
+
+.form-group label i {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+}
+
+.required {
+    color: #ef4444;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-family: var(--font-family) !important;
+    color: var(--text-primary);
+    background: var(--bg-light);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group input.error,
+.form-group textarea.error {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+.error-message {
+    display: block;
+    color: #ef4444;
+    font-size: 0.8125rem;
+    margin-top: 6px;
+    font-family: var(--font-family) !important;
+    min-height: 20px;
+}
+
+.error-message:empty {
+    display: none;
+}
+
+.field-hint {
+    display: block;
+    color: var(--text-light);
+    font-size: 0.75rem;
+    margin-top: 4px;
+    font-family: var(--font-family) !important;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-family) !important;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background: var(--bg-gray);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--border-color);
+}
+
+.btn-large {
+    padding: 12px 24px;
+    font-size: 0.9375rem;
+}
+
+.btn-add {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    font-family: var(--font-family) !important;
+}
+
+.btn-add:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   DYNAMIC ITEMS (Experience, Education, etc.)
+   ============================================ */
+
+.dynamic-item {
+    background: var(--bg-light);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+.dynamic-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.dynamic-item-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-family) !important;
+}
+
+.btn-remove {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-family: var(--font-family) !important;
+    transition: all 0.3s ease;
+}
+
+.btn-remove:hover {
+    background: #dc2626;
+}
+
+/* ============================================
+   UPLOAD AREA
+   ============================================ */
+
+.upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--bg-light);
+}
+
+.upload-area:hover,
+.upload-area.active {
+    border-color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.upload-content i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+.upload-content p {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 8px 0;
+    font-family: var(--font-family) !important;
+}
+
+.upload-hint {
+    color: var(--text-secondary) !important;
+    font-weight: 400 !important;
+}
+
+.upload-content small {
+    color: var(--text-light);
+    font-size: 0.875rem;
+    font-family: var(--font-family) !important;
+}
+
+.upload-status {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-family: var(--font-family) !important;
+}
+
+.upload-status.success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+.upload-status.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+}
+
+/* ============================================
+   FORM ACTIONS
+   ============================================ */
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.form-actions .btn {
+    flex: 1;
+}
+
+/* ============================================
+   PREVIEW SECTION
+   ============================================ */
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 12px 12px 0 0;
+}
+
+.preview-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-family) !important;
+}
+
+.btn-close-preview {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 8px;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+}
+
+.btn-close-preview:hover {
+    color: var(--text-primary);
+}
+
+.preview-content {
+    background: white;
+    padding: 16px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.cv-preview {
+    background: white;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: var(--font-family) !important;
+    line-height: 1.6;
+    font-size: 0.875rem;
+}
+
+.cv-preview h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    font-family: var(--font-family) !important;
+}
+
+.cv-preview h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 20px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-color);
+    font-family: var(--font-family) !important;
+}
+
+.cv-preview h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 16px;
+    margin-bottom: 6px;
+    font-family: var(--font-family) !important;
+}
+
+.cv-preview p {
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    font-family: var(--font-family) !important;
+}
+
+.cv-preview ul {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+}
+
+.cv-preview ul li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    color: var(--text-secondary);
+    font-family: var(--font-family) !important;
+}
+
+.cv-preview ul li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.cv-preview .preview-item {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cv-preview .preview-item:last-child {
+    border-bottom: none;
+}
+
+.cv-preview .preview-meta {
+    color: var(--text-light);
+    font-size: 0.875rem;
+    margin-top: 4px;
+    font-family: var(--font-family) !important;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .resume-main {
+        padding: 30px 0 30px;
+    }
+
+    .resume-container {
+        padding: 0 16px;
+    }
+
+    .resume-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+        padding: 16px;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .header-actions .btn {
+        flex: 1;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .card-body {
+        padding: 16px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .preview-section {
+        position: relative;
+        top: 0;
+        max-height: none;
+    }
+}
+
+/* ============================================
+   SAVED RESUME VIEW
+   ============================================ */
+
+.saved-resume-view {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    padding: 20px;
+}
+
+.resume-meta {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-family: var(--font-family) !important;
+}
+
+.resume-meta p {
+    margin: 8px 0;
+    font-family: var(--font-family) !important;
+}
+
+.no-resume {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.no-resume-content i {
+    font-size: 4rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.no-resume-content h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    font-family: var(--font-family) !important;
+}
+
+.no-resume-content p {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    font-family: var(--font-family) !important;
+}
+
+@media (max-width: 480px) {
+    .resume-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .resume-main {
+        padding: 20px 0 20px;
+    }
+    
+    .no-resume {
+        padding: 40px 20px;
+    }
+}

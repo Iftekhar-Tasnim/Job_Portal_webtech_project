@@ -1,0 +1,134 @@
+/* Simple Notification Popup Styles */
+
+.notification-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 16px 20px;
+    min-width: 300px;
+    max-width: 400px;
+    z-index: 10000;
+    display: none;
+    animation: slideInRight 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.notification-popup.show {
+    display: block;
+}
+
+.notification-popup.success {
+    border-left: 4px solid #10b981;
+}
+
+.notification-popup.error {
+    border-left: 4px solid #ef4444;
+}
+
+.notification-popup.info {
+    border-left: 4px solid #3b82f6;
+}
+
+.notification-popup.warning {
+    border-left: 4px solid #f59e0b;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.notification-title {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: #1f2937;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notification-title i {
+    font-size: 1rem;
+}
+
+.notification-popup.success .notification-title i {
+    color: #10b981;
+}
+
+.notification-popup.error .notification-title i {
+    color: #ef4444;
+}
+
+.notification-popup.info .notification-title i {
+    color: #3b82f6;
+}
+
+.notification-popup.warning .notification-title i {
+    color: #f59e0b;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 1.125rem;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.notification-close:hover {
+    color: #1f2937;
+}
+
+.notification-message {
+    font-size: 0.875rem;
+    color: #4b5563;
+    line-height: 1.5;
+    margin: 0;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.notification-popup.hide {
+    animation: slideOutRight 0.3s ease;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .notification-popup {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+        max-width: none;
+    }
+}
+

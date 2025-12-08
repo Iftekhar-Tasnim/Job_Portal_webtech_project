@@ -1,0 +1,1027 @@
+================================================================================
+                    EMPLOYIFY JOB PORTAL - SELENIUM TEST PLAN
+                    Software Quality Assurance & Testing (SQAT)
+================================================================================
+
+Project: Employify Job Portal
+Team Size: 2 Members
+Testing Tool: Selenium WebDriver
+Date: December 2024
+
+================================================================================
+                            TEST SCOPE
+================================================================================
+
+This test plan covers the following major features:
+1. User Authentication (Login & Registration)
+2. Job Search & Filtering
+3. Job Application Process
+4. Profile Management
+5. Resume Builder
+6. Company Dashboard (Employer Features)
+7. Navigation & UI Elements
+
+================================================================================
+                        TEST ENVIRONMENT SETUP
+================================================================================
+
+Base URL: http://localhost/job/view/
+Browser: Chrome/Firefox/Edge (specify in test execution)
+Test Data: See CREDENTIALS.txt for test accounts
+
+Test Accounts:
+- Applicant: applicant@employify.com / password
+- Employer: employer@employify.com / password
+
+================================================================================
+                    TEST CASES FOR TEAM OF 2
+================================================================================
+
+================================================================================
+MODULE 1: USER AUTHENTICATION (TEAM MEMBER 1)
+================================================================================
+
+TC-001: Applicant Login - Valid Credentials
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on login page
+Steps:
+1. Navigate to http://localhost/job/view/login.php
+2. Click on "Applicant Login" tab (if not already selected)
+3. Enter email: applicant@employify.com
+4. Enter password: password
+5. Click "Login as Applicant" button
+Expected Result: User should be redirected to home.php, navbar should show user name
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-002: Applicant Login - Invalid Email
+--------------------------------------------------
+Priority: High
+Type: Negative
+Precondition: User is on login page
+Steps:
+1. Navigate to login page
+2. Click "Applicant Login" tab
+3. Enter invalid email: invalid@test.com
+4. Enter password: password
+5. Click "Login as Applicant" button
+Expected Result: Error message displayed, user remains on login page
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-003: Applicant Login - Invalid Password
+--------------------------------------------------
+Priority: High
+Type: Negative
+Precondition: User is on login page
+Steps:
+1. Navigate to login page
+2. Click "Applicant Login" tab
+3. Enter email: applicant@employify.com
+4. Enter wrong password: wrongpass
+5. Click "Login as Applicant" button
+Expected Result: Error message displayed, user remains on login page
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-004: Employer Login - Valid Credentials
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on login page
+Steps:
+1. Navigate to login page
+2. Click on "Employer Login" tab
+3. Enter email: employer@employify.com
+4. Enter password: password
+5. Click "Login as Employer" button
+Expected Result: User should be redirected to home.php, navbar should show company name
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-005: Applicant Registration - Valid Data
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on registration page, not logged in
+Steps:
+1. Navigate to http://localhost/job/view/registration.php
+2. Click "Applicant Registration" tab
+3. Fill all required fields:
+   - First Name: Test
+   - Last Name: User
+   - Email: testuser+[timestamp]@test.com
+   - Phone: 1234567890
+   - Address: Test Address
+   - Gender: Male
+   - Password: testpass123
+   - Confirm Password: testpass123
+4. Click "Register as Applicant" button
+Expected Result: Success message displayed, user redirected to login page
+Actual Result: 
+Status: Pass/Fail
+Notes: Use unique email with timestamp to avoid duplicate errors
+
+TC-006: Applicant Registration - Duplicate Email
+--------------------------------------------------
+Priority: Medium
+Type: Negative
+Precondition: User is on registration page
+Steps:
+1. Navigate to registration page
+2. Click "Applicant Registration" tab
+3. Enter email: applicant@employify.com (existing email)
+4. Fill other required fields
+5. Click "Register as Applicant" button
+Expected Result: Error message indicating email already exists
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-007: Applicant Registration - Password Mismatch
+--------------------------------------------------
+Priority: Medium
+Type: Negative
+Precondition: User is on registration page
+Steps:
+1. Navigate to registration page
+2. Click "Applicant Registration" tab
+3. Fill form with password: testpass123
+4. Fill confirm password: differentpass
+5. Click "Register as Applicant" button
+Expected Result: Error message indicating passwords do not match
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-008: Forgot Password - Valid Email
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: User is on forgot password page
+Steps:
+1. Navigate to http://localhost/job/view/forgetpass.php
+2. Enter email: applicant@employify.com
+3. Click "Verify Email" button
+4. Enter new password: newpass123
+5. Enter confirm password: newpass123
+6. Click "Reset Password" button
+Expected Result: Success message displayed, redirected to login page
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-009: Forgot Password - Invalid Email
+--------------------------------------------------
+Priority: Medium
+Type: Negative
+Precondition: User is on forgot password page
+Steps:
+1. Navigate to forgot password page
+2. Enter invalid email: notexist@test.com
+3. Click "Verify Email" button
+Expected Result: Error message "Email not found in our system"
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-010: Logout Functionality
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in
+Steps:
+1. Login as applicant or employer
+2. Click on profile dropdown in navbar
+3. Click "Logout" option
+Expected Result: User logged out, redirected to home page, login button visible
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+================================================================================
+MODULE 2: JOB SEARCH & FILTERING (TEAM MEMBER 1)
+================================================================================
+
+TC-011: Job Search - By Keyword
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on jobs page
+Steps:
+1. Navigate to http://localhost/job/view/jobs.php
+2. Enter search keyword in search box: "developer"
+3. Click search button or press Enter
+Expected Result: Job listings filtered to show only jobs containing "developer"
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-012: Job Filter - By Location
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on jobs page
+Steps:
+1. Navigate to jobs page
+2. Select a location from "Location" filter dropdown
+3. Observe job listings
+Expected Result: Only jobs from selected location are displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-013: Job Filter - By Category
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on jobs page
+Steps:
+1. Navigate to jobs page
+2. Select a category from "Category" filter dropdown
+3. Observe job listings
+Expected Result: Only jobs from selected category are displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-014: Job Filter - By Experience Level
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: User is on jobs page
+Steps:
+1. Navigate to jobs page
+2. Select experience level: "Entry Level"
+3. Observe job listings
+Expected Result: Only entry level jobs are displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-015: Job Filter - Multiple Filters Combined
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on jobs page
+Steps:
+1. Navigate to jobs page
+2. Select location: "Dhaka"
+3. Select category: "IT & Software"
+4. Select experience: "Mid Level"
+5. Observe results
+Expected Result: Jobs matching all selected filters are displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-016: View Job Details - Modal
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on jobs page
+Steps:
+1. Navigate to jobs page
+2. Click on any job card
+Expected Result: Job details modal opens showing full job description, requirements, salary
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-017: Close Job Details Modal
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: Job details modal is open
+Steps:
+1. Open job details modal (from TC-016)
+2. Click close button (X) or click outside modal
+Expected Result: Modal closes, user can see job listings again
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-018: Save Job - While Logged In
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in as applicant, on jobs page
+Steps:
+1. Login as applicant
+2. Navigate to jobs page
+3. Click bookmark icon on any job card
+Expected Result: Job is saved, bookmark icon changes to filled/bookmarked state
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-019: Save Job - While Not Logged In
+--------------------------------------------------
+Priority: Medium
+Type: Negative
+Precondition: User is NOT logged in, on jobs page
+Steps:
+1. Navigate to jobs page (without login)
+2. Click bookmark icon on any job card
+Expected Result: Alert/redirect to login page asking user to login
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-020: Apply for Job - While Logged In
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in as applicant
+Steps:
+1. Login as applicant
+2. Navigate to jobs page
+3. Click "Apply Now" button on any job
+4. Confirm application in popup
+5. Enter optional cover letter or leave blank
+Expected Result: Success message displayed, "Applied" badge shown on job card
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-021: Apply for Job - While Not Logged In
+--------------------------------------------------
+Priority: Medium
+Type: Negative
+Precondition: User is NOT logged in
+Steps:
+1. Navigate to jobs page (without login)
+2. Click "Apply Now" button on any job
+Expected Result: Alert asking to login, redirect to login page
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-022: Apply for Job - Already Applied
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: User has already applied to a job
+Steps:
+1. Login as applicant
+2. Navigate to jobs page
+3. Find a job that shows "Applied" badge
+4. Try to click "Apply Now" button
+Expected Result: Button should be disabled or show "Already Applied" status
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+================================================================================
+MODULE 3: PROFILE MANAGEMENT (TEAM MEMBER 2)
+================================================================================
+
+TC-023: View Profile - Dashboard Section
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in as applicant
+Steps:
+1. Login as applicant
+2. Click profile dropdown in navbar
+3. Click "My Profile"
+4. Observe dashboard section
+Expected Result: Profile page opens showing dashboard with stats (Applied Jobs, Saved Jobs, Interviews)
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-024: Update Profile Information
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in, on profile page
+Steps:
+1. Login as applicant
+2. Navigate to Profile.php
+3. Click "Profile" in sidebar
+4. Update Full Name field
+5. Update Phone number
+6. Update Location
+7. Click "Save Changes" button
+Expected Result: Success message displayed, changes saved
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-025: View Applications - All Status
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in as applicant, has applications
+Steps:
+1. Login as applicant
+2. Navigate to Profile.php
+3. Click "Applications" in sidebar
+4. Select "All Status" from filter dropdown
+Expected Result: All job applications are displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-026: Filter Applications - By Status
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: User is logged in, has applications
+Steps:
+1. Login as applicant
+2. Navigate to Profile.php > Applications section
+3. Select status: "Under Review" from filter
+Expected Result: Only applications with "review" status are displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-027: View Saved Jobs
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in, has saved jobs
+Steps:
+1. Login as applicant
+2. Navigate to Profile.php
+3. Click "Saved Jobs" in sidebar
+Expected Result: List of all saved jobs is displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-028: Remove Saved Job
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: User has saved jobs
+Steps:
+1. Login as applicant
+2. Navigate to Profile.php > Saved Jobs section
+3. Click "Remove" button on any saved job
+4. Confirm removal
+Expected Result: Job removed from saved list, success message displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-029: Change Password - Valid Data
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in
+Steps:
+1. Login as applicant
+2. Navigate to Profile.php
+3. Click "Settings" in sidebar
+4. Enter current password: password
+5. Enter new password: newpass123
+6. Enter confirm password: newpass123
+7. Click "Update Password" button
+Expected Result: Success message displayed, password updated
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-030: Change Password - Mismatch
+--------------------------------------------------
+Priority: Medium
+Type: Negative
+Precondition: User is logged in
+Steps:
+1. Login as applicant
+2. Navigate to Profile.php > Settings
+3. Enter new password: newpass123
+4. Enter confirm password: differentpass
+5. Click "Update Password" button
+Expected Result: Error message "Passwords do not match"
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+================================================================================
+MODULE 4: RESUME BUILDER (TEAM MEMBER 2)
+================================================================================
+
+TC-031: Access Resume Builder
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in as applicant
+Steps:
+1. Login as applicant
+2. Click "CV Maker" icon in navbar or navigate to resume.php
+Expected Result: Resume builder page opens with form fields
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-032: Fill Resume Form - Personal Information
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on resume builder page
+Steps:
+1. Navigate to resume.php
+2. Fill Personal Information section:
+   - Full Name
+   - Email
+   - Phone
+   - Address
+   - Website/Portfolio (optional)
+Expected Result: All fields accept input, validation works
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-033: Add Work Experience
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on resume builder page
+Steps:
+1. Navigate to resume.php
+2. Scroll to Experience section
+3. Click "Add Experience" button
+4. Fill experience fields:
+   - Job Title
+   - Company
+   - Start Date
+   - End Date
+   - Description
+Expected Result: New experience entry added, visible in form
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-034: Add Education
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on resume builder page
+Steps:
+1. Navigate to resume.php
+2. Scroll to Education section
+3. Click "Add Education" button
+4. Fill education fields
+Expected Result: New education entry added
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-035: View Resume Preview
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User has filled resume form
+Steps:
+1. Fill resume form with data
+2. Scroll to preview section
+Expected Result: Real-time preview shows formatted resume
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-036: Save Resume
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User has filled resume form
+Steps:
+1. Fill resume form completely
+2. Click "Save Resume" button
+Expected Result: Success message displayed, resume saved to database
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-037: View Saved Resume
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User has saved a resume
+Steps:
+1. Login as applicant
+2. Navigate to my_resume.php or click "My Resume" from profile dropdown
+Expected Result: Saved resume is displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-038: Export Resume - PDF
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: User has filled resume form
+Steps:
+1. Fill resume form
+2. Click "Export as PDF" or "Print" button
+Expected Result: Print dialog opens or PDF download starts
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+================================================================================
+MODULE 5: COMPANY/EMPLOYER FEATURES (TEAM MEMBER 2)
+================================================================================
+
+TC-039: Access Company Dashboard
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in as employer
+Steps:
+1. Login as employer
+2. Click profile dropdown
+3. Click "Company Dashboard"
+Expected Result: Company dashboard opens showing statistics and overview
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-040: Post New Job - Valid Data
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in as employer
+Steps:
+1. Login as employer
+2. Navigate to post_job.php
+3. Fill all required fields:
+   - Job Title
+   - Company Name
+   - Description
+   - Location
+   - Category
+   - Experience Level
+   - Job Type
+4. Click "Post Job" button
+Expected Result: Success message displayed, job posted and visible in manage jobs
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-041: Post New Job - Missing Required Fields
+--------------------------------------------------
+Priority: Medium
+Type: Negative
+Precondition: User is on post job page
+Steps:
+1. Login as employer
+2. Navigate to post_job.php
+3. Leave required fields empty
+4. Click "Post Job" button
+Expected Result: Validation errors displayed, job not posted
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-042: View Manage Jobs
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is logged in as employer, has posted jobs
+Steps:
+1. Login as employer
+2. Navigate to manage_jobs.php
+Expected Result: List of all posted jobs is displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-043: Edit Job
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User has posted jobs
+Steps:
+1. Login as employer
+2. Navigate to manage_jobs.php
+3. Click "Edit" button on any job
+4. Modify job details
+5. Click "Update Job" button
+Expected Result: Job updated successfully, changes reflected in job list
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-044: Delete Job
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: User has posted jobs
+Steps:
+1. Login as employer
+2. Navigate to manage_jobs.php
+3. Click "Delete" button on any job
+4. Confirm deletion
+Expected Result: Job deleted, removed from list
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-045: Toggle Job Status
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: User has posted jobs
+Steps:
+1. Login as employer
+2. Navigate to manage_jobs.php
+3. Click toggle switch to change job status (active/closed)
+Expected Result: Job status updated, reflected in UI
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-046: View Applications
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User has posted jobs with applications
+Steps:
+1. Login as employer
+2. Navigate to view_applications.php
+Expected Result: List of all applications for company's jobs is displayed
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-047: Update Application Status
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User has applications
+Steps:
+1. Login as employer
+2. Navigate to view_applications.php
+3. Select an application
+4. Change status to "Under Review" or "Interview"
+5. Click "Update Status" button
+Expected Result: Application status updated successfully
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+================================================================================
+MODULE 6: NAVIGATION & UI ELEMENTS (BOTH TEAM MEMBERS)
+================================================================================
+
+TC-048: Navbar Navigation - Home Link
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on any page
+Steps:
+1. Navigate to any page (e.g., jobs.php)
+2. Click "Home" link in navbar
+Expected Result: User redirected to home.php
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-049: Navbar Navigation - Find Jobs Link
+--------------------------------------------------
+Priority: High
+Type: Positive
+Precondition: User is on any page
+Steps:
+1. Navigate to any page
+2. Click "Find a Job" link in navbar
+Expected Result: User redirected to jobs.php
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-050: Profile Dropdown - Open/Close
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: User is logged in
+Steps:
+1. Login as applicant or employer
+2. Click on profile dropdown trigger
+Expected Result: Dropdown menu opens showing profile options
+3. Click outside dropdown
+Expected Result: Dropdown closes
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-051: Mobile Menu - Toggle
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: User is on mobile viewport or responsive mode
+Steps:
+1. Resize browser to mobile width (< 768px)
+2. Click hamburger menu icon
+Expected Result: Mobile menu opens
+3. Click hamburger icon again
+Expected Result: Mobile menu closes
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-052: Notification Icon - Click
+--------------------------------------------------
+Priority: Low
+Type: Positive
+Precondition: User is logged in as applicant
+Steps:
+1. Login as applicant
+2. Click notification bell icon in navbar
+Expected Result: Notification dropdown panel opens
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-053: Footer Links - Navigation
+--------------------------------------------------
+Priority: Low
+Type: Positive
+Precondition: User is on any page with footer
+Steps:
+1. Scroll to footer
+2. Click any footer link (e.g., "About", "Contact")
+Expected Result: User navigated to corresponding page
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-054: Responsive Design - Desktop View
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: Browser window at desktop size
+Steps:
+1. Set browser window to 1920x1080
+2. Navigate to home.php
+3. Observe layout
+Expected Result: All elements properly aligned, navbar full width, no horizontal scroll
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-055: Responsive Design - Tablet View
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: Browser window at tablet size
+Steps:
+1. Set browser window to 768x1024
+2. Navigate to jobs.php
+3. Observe layout
+Expected Result: Layout adapts to tablet size, elements stack appropriately
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+TC-056: Responsive Design - Mobile View
+--------------------------------------------------
+Priority: Medium
+Type: Positive
+Precondition: Browser window at mobile size
+Steps:
+1. Set browser window to 375x667
+2. Navigate to home.php
+3. Observe layout
+Expected Result: Mobile menu visible, content stacks vertically, no horizontal scroll
+Actual Result: 
+Status: Pass/Fail
+Notes:
+
+================================================================================
+                        TEST EXECUTION ASSIGNMENT
+================================================================================
+
+TEAM MEMBER 1:
+--------------
+- Module 1: User Authentication (TC-001 to TC-010)
+- Module 2: Job Search & Filtering (TC-011 to TC-022)
+Total: 22 Test Cases
+
+TEAM MEMBER 2:
+--------------
+- Module 3: Profile Management (TC-023 to TC-030)
+- Module 4: Resume Builder (TC-031 to TC-038)
+- Module 5: Company/Employer Features (TC-039 to TC-047)
+- Module 6: Navigation & UI (TC-048 to TC-056) - Shared
+Total: 34 Test Cases
+
+SHARED TESTING:
+---------------
+- Module 6: Navigation & UI Elements (Both team members can test)
+- Cross-browser testing (Chrome, Firefox, Edge)
+- Regression testing after fixes
+
+================================================================================
+                        SELENIUM IMPLEMENTATION TIPS
+================================================================================
+
+1. Page Object Model (POM):
+   - Create separate classes for each page (LoginPage, JobsPage, ProfilePage, etc.)
+   - Store locators in one place
+   - Reusable methods for common actions
+
+2. Test Data Management:
+   - Use external files (Excel, CSV, JSON) for test data
+   - Separate test data from test scripts
+   - Use unique emails with timestamps for registration tests
+
+3. Wait Strategies:
+   - Use explicit waits (WebDriverWait) instead of Thread.sleep()
+   - Wait for elements to be clickable/visible before interaction
+   - Handle dynamic content loading
+
+4. Assertions:
+   - Verify page titles, URLs, element visibility
+   - Check success/error messages
+   - Validate data in tables/lists
+
+5. Screenshots:
+   - Capture screenshots on test failure
+   - Save with timestamp and test name
+   - Useful for debugging
+
+6. Test Reports:
+   - Use TestNG or JUnit for test execution
+   - Generate HTML reports
+   - Include screenshots in reports
+
+7. Common Locators to Use:
+   - ID: Best choice when available
+   - CSS Selector: Fast and reliable
+   - XPath: Use when ID/CSS not available
+   - Link Text: For navigation links
+
+8. Handling Dynamic Elements:
+   - Use relative XPath or CSS selectors
+   - Wait for elements to load
+   - Handle AJAX calls properly
+
+================================================================================
+                        PRIORITY BREAKDOWN
+================================================================================
+
+HIGH PRIORITY (Must Test):
+- TC-001, TC-002, TC-003, TC-004 (Login)
+- TC-005, TC-006, TC-007 (Registration)
+- TC-011, TC-012, TC-013, TC-015 (Job Search/Filter)
+- TC-018, TC-020 (Save/Apply Job)
+- TC-023, TC-024, TC-027 (Profile)
+- TC-031, TC-036 (Resume)
+- TC-040, TC-042, TC-046 (Employer Features)
+
+MEDIUM PRIORITY (Should Test):
+- TC-008, TC-009 (Forgot Password)
+- TC-014, TC-016, TC-017 (Job Details)
+- TC-025, TC-026, TC-028, TC-029 (Profile Management)
+- TC-033, TC-034, TC-035 (Resume Builder)
+- TC-041, TC-043, TC-044, TC-045, TC-047 (Employer Management)
+
+LOW PRIORITY (Nice to Have):
+- TC-010, TC-019, TC-021, TC-022 (Edge Cases)
+- TC-030 (Password Validation)
+- TC-032, TC-037, TC-038 (Resume Features)
+- TC-048 to TC-056 (Navigation/UI)
+
+================================================================================
+                        TEST DELIVERABLES
+================================================================================
+
+1. Test Plan Document (This file)
+2. Test Scripts (Selenium WebDriver code)
+3. Test Execution Report (Excel/Word with results)
+4. Bug Report (If defects found)
+5. Test Summary Report
+
+================================================================================
+                        NOTES FOR TESTING
+================================================================================
+
+- Always use unique test data (especially emails) to avoid conflicts
+- Clear browser cache/cookies between test runs if needed
+- Test in multiple browsers (Chrome, Firefox, Edge)
+- Test on different screen sizes (responsive design)
+- Document any bugs found with steps to reproduce
+- Take screenshots of failures
+- Note any performance issues
+- Test both positive and negative scenarios
+- Verify error messages are user-friendly
+- Check form validations work correctly
+
+================================================================================
+                        END OF TEST PLAN
+================================================================================
+
+Good luck with your SQAT assignment! 🚀
+

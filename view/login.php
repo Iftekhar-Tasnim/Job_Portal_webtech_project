@@ -15,97 +15,230 @@
 <body>
     <!-- Navbar -->
     <?php include 'navbar.php'; ?>
-    
-    <div class="main-container">
-        <div class="welcome-section">
-            <h2>Welcome to Job Portal</h2>
-            <p>Please sign in to continue</p>
+
+    <main class="login-main">
+        <div class="login-container">
+            <!-- User Type Selector -->
+            <div class="user-type-selector">
+                <button class="type-btn active" data-type="applicant" id="applicantBtn">
+                    <i class="fas fa-user"></i>
+                    <span>Job Seeker</span>
+                </button>
+                <button class="type-btn" data-type="employer" id="employerBtn">
+                    <i class="fas fa-building"></i>
+                    <span>Employer</span>
+                </button>
+            </div>
+
+            <!-- Login Forms Container -->
+            <div class="forms-container">
+                <?php
+                // Display general login error if any
+                if (isset($_SESSION['login_error'])) {
+                    echo '<div class="alert-message error-alert" id="loginErrorAlert">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>' . htmlspecialchars($_SESSION['login_error']) . '</span>
+                            <button class="alert-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+                          </div>';
+                    unset($_SESSION['login_error']);
+                }
+                
+                // Get validation errors if any
+                $errors = isset($_SESSION['login_errors']) ? $_SESSION['login_errors'] : [];
+                unset($_SESSION['login_errors']);
+                ?>
+
+                <!-- Applicant Login Form -->
+                <div class="login-form-wrapper active" id="applicantForm">
+                    <div class="form-header">
+                        <div class="form-icon applicant-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h2>Job Seeker Login</h2>
+                        <p>Sign in to access your profile and job applications</p>
+                    </div>
+                    <form id="applicantLoginForm" action="../controller/logincheck.php" method="POST" class="login-form">
+                        <input type="hidden" name="user_type" value="applicant">
+                        <input type="hidden" name="submit" value="1">
+                        
+                        <div class="form-group">
+                            <label for="applicantEmail">
+                                <i class="fas fa-envelope"></i>
+                                Email Address <span class="required">*</span>
+                            </label>
+                            <input 
+                                type="email" 
+                                id="applicantEmail" 
+                                name="email" 
+                                placeholder="Enter your email address"
+                                value="<?php echo isset($_SESSION['old_input']['email']) ? htmlspecialchars($_SESSION['old_input']['email']) : ''; ?>"
+                                required
+                                autocomplete="email"
+                            >
+                            <span class="error-message" id="applicantEmailError">
+                                <?php echo isset($errors['email']) ? htmlspecialchars($errors['email']) : ''; ?>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="applicantPassword">
+                                <i class="fas fa-lock"></i>
+                                Password <span class="required">*</span>
+                            </label>
+                            <div class="password-input-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="applicantPassword" 
+                                    name="password" 
+                                    placeholder="Enter your password"
+                                    required
+                                    autocomplete="current-password"
+                                >
+                                <button type="button" class="password-toggle" id="applicantPasswordToggle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="error-message" id="applicantPasswordError">
+                                <?php echo isset($errors['password']) ? htmlspecialchars($errors['password']) : ''; ?>
+                            </span>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" name="remember_me" value="1">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="forgetpass.php" class="forgot-password-link">
+                                <i class="fas fa-key"></i> Forgot Password?
+                            </a>
+                        </div>
+
+                        <button type="submit" class="submit-btn" name="submit">
+                            <span>Sign In as Job Seeker</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Employer Login Form -->
+                <div class="login-form-wrapper" id="employerForm">
+                    <div class="form-header">
+                        <div class="form-icon employer-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h2>Employer Login</h2>
+                        <p>Sign in to manage your company profile and job postings</p>
+                    </div>
+                    <form id="employerLoginForm" action="../controller/logincheck.php" method="POST" class="login-form">
+                        <input type="hidden" name="user_type" value="employer">
+                        <input type="hidden" name="submit" value="1">
+                        
+                        <div class="form-group">
+                            <label for="employerEmail">
+                                <i class="fas fa-envelope"></i>
+                                Company Email <span class="required">*</span>
+                            </label>
+                            <input 
+                                type="email" 
+                                id="employerEmail" 
+                                name="email" 
+                                placeholder="Enter your company email"
+                                value="<?php echo isset($_SESSION['old_input']['email']) ? htmlspecialchars($_SESSION['old_input']['email']) : ''; ?>"
+                                required
+                                autocomplete="email"
+                            >
+                            <span class="error-message" id="employerEmailError">
+                                <?php echo isset($errors['email']) ? htmlspecialchars($errors['email']) : ''; ?>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="employerPassword">
+                                <i class="fas fa-lock"></i>
+                                Password <span class="required">*</span>
+                            </label>
+                            <div class="password-input-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="employerPassword" 
+                                    name="password" 
+                                    placeholder="Enter your password"
+                                    required
+                                    autocomplete="current-password"
+                                >
+                                <button type="button" class="password-toggle" id="employerPasswordToggle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="error-message" id="employerPasswordError">
+                                <?php echo isset($errors['password']) ? htmlspecialchars($errors['password']) : ''; ?>
+                            </span>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" name="remember_me" value="1">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="forgetpass.php" class="forgot-password-link">
+                                <i class="fas fa-key"></i> Forgot Password?
+                            </a>
+                        </div>
+
+                        <button type="submit" class="submit-btn" name="submit">
+                            <span>Sign In as Employer</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Registration Link -->
+            <div class="registration-prompt">
+                <p>Don't have an account? <a href="registration.php">Create an account <i class="fas fa-arrow-right"></i></a></p>
+            </div>
         </div>
-        <div class="login-options">
-            <button class="login-option active" data-type="applicant">Applicant Login</button>
-            <button class="login-option" data-type="employer">Employer Login</button>
-        </div>
-        <div class="login-panels">
-            <?php
-            // Display general login error if any
-            if (isset($_SESSION['login_error'])) {
-                echo '<div class="error-message">' . htmlspecialchars($_SESSION['login_error']) . '</div>';
-                unset($_SESSION['login_error']);
-            }
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Employify</h3>
+                <p>Find your dream job with Employify. Connect with top employers and start your career journey today.</p>
+            </div>
             
-            // Get validation errors if any
-            $errors = isset($_SESSION['login_errors']) ? $_SESSION['login_errors'] : [];
-            unset($_SESSION['login_errors']);
-            ?>
-            <div class="login-panel active" id="applicantLogin">
-                <form id="applicantLoginForm" action="../controller/logincheck.php" method="POST">
-                    <input type="hidden" name="user_type" value="applicant">
-                    <div class="input-group">
-                        <label for="applicantEmail"><i class="fas fa-envelope"></i> Email Address</label>
-                        <input type="email" id="applicantEmail" name="email" required 
-                               value="<?php echo isset($_SESSION['old_input']['email']) ? htmlspecialchars($_SESSION['old_input']['email']) : ''; ?>">
-                        <?php if(isset($errors['email'])): ?>
-                            <div class="validation-message error"><?php echo htmlspecialchars($errors['email']); ?></div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="input-group">
-                        <label for="applicantPassword"><i class="fas fa-lock"></i> Password</label>
-                        <input type="password" id="applicantPassword" name="password" required>
-                        <?php if(isset($errors['password'])): ?>
-                            <div class="validation-message error"><?php echo htmlspecialchars($errors['password']); ?></div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="form-actions">
-                        <a href="forgetpass.php" class="password-reset-link">Forgot Password?</a>
-                        <button type="submit" class="submit-button" name="submit">Login as Applicant</button>
-                    </div>
-                </form>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home.php">Home</a></li>
+                    <li><a href="jobs.php">Find a Job</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="career-resources.php">Career Resources</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="resume.php">CV Maker</a></li>
+                </ul>
             </div>
-            <div class="login-panel" id="employerLogin">
-                <form id="employerLoginForm" action="../controller/logincheck.php" method="POST">
-                    <input type="hidden" name="user_type" value="employer">
-                    <div class="input-group">
-                        <label for="employerEmail"><i class="fas fa-envelope"></i> Company Email</label>
-                        <input type="email" id="employerEmail" name="email" required
-                               value="<?php echo isset($_SESSION['old_input']['email']) ? htmlspecialchars($_SESSION['old_input']['email']) : ''; ?>">
-                        <?php if(isset($errors['email'])): ?>
-                            <div class="validation-message error"><?php echo htmlspecialchars($errors['email']); ?></div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="input-group">
-                        <label for="employerPassword"><i class="fas fa-lock"></i> Password</label>
-                        <input type="password" id="employerPassword" name="password" required>
-                        <?php if(isset($errors['password'])): ?>
-                            <div class="validation-message error"><?php echo htmlspecialchars($errors['password']); ?></div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="form-actions">
-                        <a href="forgetpass.php" class="password-reset-link">Forgot Password?</a>
-                        <button type="submit" class="submit-button" name="submit">Login as Employer</button>
-                    </div>
-                </form>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@employify.com</p>
+                <p>Phone: +8801711111111</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
         </div>
-        <div class="registration-link">
-            <p>New to Job Portal? <a href="registration.php">Create an account</a></p>
+        <div class="footer-bottom">
+            <p>&copy; <?php echo date('Y'); ?> Employify. All rights reserved.</p>
         </div>
-    </div>
+    </footer>
+
     <script src="../assets/js/navbar.js"></script>
     <script src="../assets/js/login.js"></script>
-    <script>
-        // Debug: Log form submissions
-        document.addEventListener('DOMContentLoaded', function() {
-            const employerForm = document.getElementById('employerLoginForm');
-            if (employerForm) {
-                employerForm.addEventListener('submit', function(e) {
-                    console.log('Employer form submitting...');
-                    console.log('Email:', this.querySelector('[name=email]').value);
-                    console.log('User Type:', this.querySelector('[name=user_type]').value);
-                    // Let it submit normally - don't prevent
-                });
-            }
-        });
-    </script>
 </body>
 </html>
 <?php

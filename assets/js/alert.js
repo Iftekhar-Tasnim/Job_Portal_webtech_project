@@ -95,7 +95,6 @@ function updateRecommendedJobs(preferences) {
                (!preferences.location || job.location.toLowerCase().includes(preferences.location.toLowerCase())) &&
                (!preferences.jobType || job.type === preferences.jobType);
     });
-
     jobsArticle.innerHTML = filteredJobs.length ? 
         filteredJobs.map(job => `
             <p><strong>${job.title}</strong></p>

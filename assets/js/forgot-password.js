@@ -1,20 +1,16 @@
+// Forgot Password JavaScript - Fully Functional
 document.addEventListener('DOMContentLoaded', function() {
     const emailForm = document.getElementById('emailForm');
-    const securityQuestionForm = document.getElementById('securityQuestionForm');
     const resetPasswordForm = document.getElementById('resetPasswordForm');
     const backToEmailLink = document.getElementById('backToEmailLink');
-    const backToSecurityLink = document.getElementById('backToSecurityLink');
     const togglePasswordIcons = document.querySelectorAll('.toggle-password');
     
-    const securityQuestions = {
-        pet: "What was your first pet's name?",
-        school: "What was your first school?",
-        city: "What city were you born in?",
-        friend: "What is your best friend's name?"
-    };
+    const API_URL = '../controller/password_reset_controller.php';
+    
+    let currentEmail = '';
+    let currentUserType = '';
 
-    let currentUser = null;
-
+    // Password visibility toggle
     togglePasswordIcons.forEach(icon => {
         icon.addEventListener('click', function() {
             const input = this.previousElementSibling;
@@ -25,57 +21,84 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    emailForm.addEventListener('submit', function(e) {
+    // Email verification form
+    emailForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         const email = document.getElementById('email').value.trim();
         const emailError = document.getElementById('emailError');
+        const submitBtn = this.querySelector('button[type="submit"]');
+
+        hideError(emailError);
 
         if (!isValidEmail(email)) {
             showError(emailError, 'Please enter a valid email address.');
             return;
         }
 
-        simulateServerRequest(() => {
-            currentUser = {
-                email: email,
-                securityQuestion: 'pet',
-                securityAnswer: 'fluffy'
-            };
-            showStep(2);
-        });
-    });
+        // Show loading state
+        const originalHTML = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
 
-    securityQuestionForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const answer = document.getElementById('securityAnswer').value.trim();
-        const answerError = document.getElementById('answerError');
+        try {
+            const formData = new FormData();
+            formData.append('action', 'check_email');
+            formData.append('email', email);
 
-        if (!answer) {
-            showError(answerError, 'Please enter your answer.');
-            return;
-        }
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                body: formData
+            });
 
-        simulateServerRequest(() => {
-            if (answer.toLowerCase() === currentUser.securityAnswer) {
-                showStep(3);
+            const data = await response.json();
+
+            if (data.success) {
+                currentEmail = email;
+                currentUserType = data.user_type;
+                
+                // Store email and user type in hidden fields
+                document.getElementById('userEmail').value = email;
+                document.getElementById('userType').value = data.user_type;
+                
+                // Show user info
+                const userInfo = document.getElementById('userInfo');
+                const userName = document.getElementById('userName');
+                userName.textContent = data.name || email;
+                userInfo.style.display = 'block';
+                
+                // Move to next step
+                showStep(2);
+                
+                if (typeof showSuccess === 'function') {
+                    showSuccess('Email verified successfully!');
+                }
             } else {
-                showError(answerError, 'Incorrect answer. Please try again.');
+                showError(emailError, data.error || 'Email not found in our system.');
             }
-        });
+        } catch (error) {
+            console.error('Error:', error);
+            showError(emailError, 'An error occurred. Please try again.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalHTML;
+        }
     });
 
-    resetPasswordForm.addEventListener('submit', function(e) {
+    // Reset password form
+    resetPasswordForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
         const passwordError = document.getElementById('passwordError');
         const confirmPasswordError = document.getElementById('confirmPasswordError');
+        const submitBtn = this.querySelector('button[type="submit"]');
 
         hideError(passwordError);
         hideError(confirmPasswordError);
 
-        if (newPassword.length < 8) {
-            showError(passwordError, 'Password must be at least 8 characters long.');
+        // Validation
+        if (newPassword.length < 6) {
+            showError(passwordError, 'Password must be at least 6 characters long.');
             return;
         }
 
@@ -84,20 +107,57 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        simulateServerRequest(() => {
-            alert('Your password has been reset successfully!');
-            window.location.href = 'login.html';
-        });
+        // Show loading state
+        const originalHTML = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting...';
+
+        try {
+            const formData = new FormData();
+            formData.append('action', 'reset_password');
+            formData.append('email', currentEmail);
+            formData.append('new_password', newPassword);
+            formData.append('confirm_password', confirmPassword);
+            formData.append('user_type', currentUserType);
+
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                if (typeof showSuccess === 'function') {
+                    showSuccess(data.message || 'Password reset successfully!');
+                } else {
+                    alert(data.message || 'Password reset successfully!');
+                }
+                
+                // Redirect to login after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'login.php';
+                }, 2000);
+            } else {
+                showError(passwordError, data.error || 'Failed to reset password. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showError(passwordError, 'An error occurred. Please try again.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalHTML;
+        }
     });
 
+    // Back to email link
     backToEmailLink.addEventListener('click', function(e) {
         e.preventDefault();
         showStep(1);
-    });
-
-    backToSecurityLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        showStep(2);
+        // Clear password fields
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmPassword').value = '';
+        document.getElementById('userInfo').style.display = 'none';
     });
 
     function showStep(stepNumber) {
@@ -116,46 +176,23 @@ document.addEventListener('DOMContentLoaded', function() {
         if (stepNumber === 1) {
             emailForm.classList.add('active');
         } else if (stepNumber === 2) {
-            securityQuestionForm.classList.add('active');
-            document.getElementById('securityQuestion').textContent = 
-                securityQuestions[currentUser.securityQuestion];
-        } else if (stepNumber === 3) {
             resetPasswordForm.classList.add('active');
         }
     }
 
     function isValidEmail(email) {
         if (!email || typeof email !== 'string') return false;
-        
-        const atIndex = email.indexOf('@');
-        const dotIndex = email.lastIndexOf('.');
-        
-        return atIndex > 0 && 
-               dotIndex > atIndex + 1 && 
-               dotIndex < email.length - 1 &&
-               email.indexOf(' ') === -1;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
 
     function showError(element, message) {
         element.textContent = message;
-        element.style.display = 'block';
+        element.classList.add('visible');
     }
 
     function hideError(element) {
         element.textContent = '';
-        element.style.display = 'none';
-    }
-
-    function simulateServerRequest(callback) {
-        const submitButton = document.activeElement;
-        const originalText = submitButton.innerHTML;
-        submitButton.disabled = true;
-        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-
-        setTimeout(() => {
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalText;
-            if (callback) callback();
-        }, 1000);
+        element.classList.remove('visible');
     }
 });

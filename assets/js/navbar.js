@@ -21,6 +21,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Notification dropdown toggle
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notificationPanel = document.getElementById('notificationPanel');
+    
+    if (notificationBtn && notificationPanel) {
+        notificationBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.dropdown-menu, .notification-panel').forEach(menu => {
+                if (menu !== notificationPanel) {
+                    menu.classList.remove('active');
+                }
+            });
+            
+            // Toggle notification panel
+            notificationPanel.classList.toggle('active');
+        });
+        
+        // Close notification panel when clicking outside
+        document.addEventListener('click', function(e) {
+            if (notificationBtn && notificationPanel) {
+                if (!notificationBtn.contains(e.target) && !notificationPanel.contains(e.target)) {
+                    notificationPanel.classList.remove('active');
+                }
+            }
+        });
+    }
+    
+    // Global function to show notification dropdown
+    window.showNotificationDropdown = function() {
+        if (notificationPanel) {
+            notificationPanel.classList.add('active');
+        }
+    };
+    
+    // Global function to close notification dropdown
+    window.closeNotificationPanel = function() {
+        if (notificationPanel) {
+            notificationPanel.classList.remove('active');
+        }
+    };
+    
     // Profile dropdown toggle
     if (profileTrigger && profileDropdown) {
         profileTrigger.addEventListener('click', function(e) {
@@ -28,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const isActive = profileDropdown.classList.contains('active');
             
             // Close all other dropdowns
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            document.querySelectorAll('.dropdown-menu, .notification-panel').forEach(menu => {
                 if (menu !== profileDropdown) {
                     menu.classList.remove('active');
                 }
@@ -48,10 +91,33 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Handle dropdown item clicks
+        const dropdownItems = profileDropdown.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Don't prevent default - allow navigation
+                // Close dropdown immediately for better UX
+                profileDropdown.classList.remove('active');
+                const arrow = profileTrigger.querySelector('.dropdown-arrow');
+                if (arrow) {
+                    arrow.style.transform = 'rotate(0deg)';
+                }
+                
+                // For hash links, handle navigation after page load
+                const href = this.getAttribute('href');
+                if (href && href.includes('#')) {
+                    // Let the browser handle navigation, then scroll to hash
+                    // This is handled by profile.js on the target page
+                }
+            });
+        });
+        
         // Close dropdown when clicking outside
         document.addEventListener('click', function(e) {
             if (profileTrigger && profileDropdown) {
-                if (!profileTrigger.contains(e.target) && !profileDropdown.contains(e.target)) {
+                // Check if click is outside both trigger and dropdown
+                const isClickInside = profileTrigger.contains(e.target) || profileDropdown.contains(e.target);
+                if (!isClickInside) {
                     profileDropdown.classList.remove('active');
                     const arrow = profileTrigger.querySelector('.dropdown-arrow');
                     if (arrow) {

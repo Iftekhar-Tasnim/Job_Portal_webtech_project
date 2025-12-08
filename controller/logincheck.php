@@ -13,7 +13,8 @@ error_log("=== LOGIN REQUEST RECEIVED ===");
 error_log("POST data: " . print_r($_POST, true));
 error_log("Session ID: " . session_id());
 
-if (isset($_POST['submit'])) {
+// Check if form was submitted (either via submit button or hidden input)
+if (isset($_POST['submit']) || isset($_POST['user_type'])) {
     $errors = [];
     
     // Get and sanitize inputs
@@ -95,7 +96,7 @@ if (isset($_POST['submit'])) {
         exit();
     }
 } else {
-    error_log("No submit button in POST data");
+    error_log("No submit button or user_type in POST data");
     $_SESSION['login_error'] = "Please submit the form properly!";
     
     if (ob_get_length()) {
